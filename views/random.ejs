@@ -1,0 +1,17 @@
+<%-include('partials/header')%>
+
+    <title>Random Gym Exercise</title>
+</head>
+<body class=" bg-dark text-light">
+    <%-include('partials/navbar')%>
+    <div class="container-fluid container text-center">
+        <h2 class="mb-4"><%=random.name %></h2>
+        <div class="ratio ratio-16x9">
+        <iframe src="<%=random.description%>&autoplay=1&mute=1" title="YouTube video player" frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> 
+        </div>
+         <br><button class="btn btn-primary" onClick="window.location.reload()">Next</button>
+    </div>
+
+<%-include('partials/footer')%>
+<!-- 560-315 -->
