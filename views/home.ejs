@@ -1,51 +1,45 @@
 <%-include('partials/header')%>
 
     <title>Random Gym Exercise</title>
-</head>
-<body class=" bg-dark text-light">
-    <%-include('partials/navbar')%>
-    <div class="container-fluid container text-center p-5">
-    <h1 class="mb-5">Choose <span class="text-primary">The Muscle</span> You Want To Work On!</h1>
-    <form action="/" method="post">
-        <div class="container-fluid text-center w-75">
-            <div class="row">
-                <div class="col-md-6 p-1">
-                    <button class="btn btn-dark" type="submit" name="muscle" value="Legs"><img class="img-thumbnail " src="/musclesPics/Legs.jpeg"></button>
-                </div>
-                <div class="col-md-6 btn btn-dark p-0">
-                    <button class="btn btn-dark" type="submit" name="muscle" value="Back"><img class="img-thumbnail" src="/musclesPics/Back.jpeg"></button>
-                </div>
+    </head>
+
+    <body class=" bg-dark text-light">
+        <%-include('partials/navbar')%>
+            <div class="container-fluid container text-center p-5">
+                <h1 class="mb-5">Choose <span class="text-primary">The Muscle</span> You Want To Work On!</h1>
+                <form action="/" method="post">
+                    <div class="container-fluid text-center w-75">
+                        <div class="row">
+                            <div class="col-md-6 p-1">
+                                <button class="btn btn-dark" type="submit" name="muscle" value="Legs"><img
+                                        class="img-thumbnail " src="/musclesPics/Legs.jpeg"></button>
+                            </div>
+                            <div class="col-md-6 btn btn-dark p-0">
+                                <button class="btn btn-dark" type="submit" name="muscle" value="Back"><img
+                                        class="img-thumbnail" src="/musclesPics/Back.jpeg"></button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 btn btn-dark p-1">
+                                <button class="btn btn-dark" type="submit" name="muscle" value="Chest"><img
+                                        class="img-thumbnail" src="/musclesPics/Chest.jpg"></button>
+                            </div>
+                            <div class="col-md-6 btn btn-dark p-1">
+                                <button class="btn btn-dark" type="submit" name="muscle" value="Shoulders"><img
+                                        class="img-thumbnail" src="/musclesPics/Shoulders.jpg"></button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 btn btn-dark p-1">
+                                <button class="btn btn-dark" type="submit" name="muscle" value="Biceps"><img
+                                        class="img-thumbnail" src="/musclesPics/Biceps.jpg"></button>
+                            </div>
+                            <div class="col-md-6 btn btn-dark p-1">
+                                <button class="btn btn-dark" type="submit" name="muscle" value="Triceps"><img
+                                        class="img-thumbnail" src="/musclesPics/Triceps.jpeg"></button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
-            <div class="row">
-                <div class="col-md-6 btn btn-dark p-1">
-                    <button class="btn btn-dark" type="submit" name="muscle" value="Chest"><img class="img-thumbnail" src="/musclesPics/Chest.jpg"></button>
-                </div>
-                <div class="col-md-6 btn btn-dark p-1">
-                    <button class="btn btn-dark" type="submit" name="muscle" value="Shoulders"><img class="img-thumbnail" src="/musclesPics/Shoulders.jpg"></button>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6 btn btn-dark p-1">
-                    <button class="btn btn-dark" type="submit" name="muscle" value="Biceps"><img class="img-thumbnail" src="/musclesPics/Biceps.jpg"></button>
-                </div>
-                <div class="col-md-6 btn btn-dark p-1">
-                    <button class="btn btn-dark" type="submit" name="muscle" value="Triceps"><img class="img-thumbnail" src="/musclesPics/Triceps.jpeg"></button>
-                </div>
-            </div>
-        </div>
-    </form>
-    </div>
 <%-include('partials/footer')%>
-<!-- 
-<form action="/" method="post" name="muscle">
-    <select class="form-select mb-4" id="muscle" aria-label="Example select with button addon" name="muscle">
-        <option selected disabled>Select a muscle from the list</option>
-        <option value="Legs">Legs</option>
-        <option value="Back">Back</option>
-        <option value="Chest">Chest</option>
-        <option value="Shoulders">Shoulders</option>
-        <option value="Biceps">Biceps</option>
-        <option value="Triceps">Triceps</option>
-    </select>
-    <button class="btn btn-primary m-3 p-3">Give Me Exercise</button>
-</form> -->

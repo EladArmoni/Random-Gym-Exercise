@@ -1,26 +1,34 @@
 <%-include('partials/header')%>
 
     <title>Random Gym Exercise</title>
-</head>
-<body class=" bg-dark text-light">
-    <%-include('partials/navbar')%>
-    <div class="row">
-        <div class="container-fluid align-items-center justify-content-center col-md-6 p-5">
-            <div class="card text-center bg-dark">
-                <div class="card-header bg-light">
-                    <h1 class="text-primary"><%=random.name%></h1>
+    </head>
+
+    <body class=" bg-dark text-light">
+        <%-include('partials/navbar')%>
+            <div class="row">
+                <div class="container-fluid align-items-center justify-content-center col-md-6 p-5">
+                    <div class="card text-center bg-dark">
+                        <div class="card-header bg-light">
+                            <h1 class="text-primary">
+                                <%=random.name%>
+                            </h1>
+                        </div>
+                        <div class="card-body">
+                            <h4 class="card-title">Main Muscle: <%=random.muscle%>
+                            </h4>
+                            <p class="card-text">Difficulty: <%=random.difficulty%>
+                            </p>
+                            <div class="ratio ratio-16x9">
+                                <iframe src="<%=random.description%>&autoplay=1&mute=1" title="YouTube video player"
+                                    frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen></iframe>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center mt-3">
+                        <button class="btn btn-primary" onClick="window.location.reload()">Next</button>
+                    </div>
                 </div>
-                <div class="card-body">
-                <h4 class="card-title">Main Muscle: <%=random.muscle%></h4>
-                <p class="card-text">Difficulty: <%=random.difficulty%></p>
-                <div class="ratio ratio-16x9">
-                    <iframe src="<%=random.description%>&autoplay=1&mute=1" title="YouTube video player" frameborder="0" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> 
-                    </div>        </div>
-                </div>
-                <div class="text-center mt-3">
-                <button class="btn btn-primary" onClick="window.location.reload()">Next</button>
-                </div>
-        </div>
-    </div>
+            </div>
 <%-include('partials/footer')%>
