@@ -9,12 +9,13 @@ mongoose.connect('mongodb://localhost:27017/gym-exercises', { useNewUrlParser: t
     console.log("Database connected");
 })
 .catch((err)=>{
-    console.log("Error!");
+    console.log("Error while connected to DB!");
 })
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.urlencoded({ extended: true }));
+app.use( express.static("public") );
 
 app.get('/', (req, res) => {
     res.render('home')
@@ -26,7 +27,12 @@ app.post('/',async (req,res)=>{
     const random=randomExercise(exercises);
     res.render('random', {random});
 })
-
+app.post('/exercise',async (req,res)=>{
+    const chosenExercise=req.body.exercise;
+    const exercise=await Exercise.findOne({"name":chosenExercise});
+    console.log(exercise);
+    res.render('showExercise', {exercise});
+})
 app.post('/admin',(req,res)=>{
     const email=req.body.Email;
     const password=req.body.Password;
@@ -50,6 +56,10 @@ app.post('/createExercise', async (req, res) => {
 
 app.get('/confirmation', (req, res) => {
     res.render('confirmation');
+})
+app.get('/showAll',async(req,res)=>{
+    const exercises=await Exercise.find({});
+    res.render('showAll',{exercises});
 })
 
 function randomExercise(exercises){

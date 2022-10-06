@@ -1,0 +1,20 @@
+<%-include('partials/header')%>
+    <title>All Exercises</title>
+    </head>
+
+    <body class=" bg-dark text-light">
+        <%-include('partials/navbar')%>
+            <div class="container-fluid container text-center w-75 p-5">
+                <h1 class="mb-4">All Exercises</h1>
+                <form action='/exercise' method="post">
+                    <select class="form-select" aria-label="Default select example" name="exercise">
+                        <% for(let exercise of exercises){ %>
+                            <option name=" <%= exercise.name%>">
+                                <%= exercise.name%>
+                            </option>
+                            <% } %>
+                    </select>
+                    <button type="submit" class="btn btn-primary p-2 m-4">Give Me Details</button>
+                </form>
+            </div>
+<%-include('partials/footer')%>
