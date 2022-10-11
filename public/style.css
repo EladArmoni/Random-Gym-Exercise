@@ -1,0 +1,22 @@
+body{
+    font-family:Arial black;
+}
+nav{
+    font-family: Arial, Helvetica, sans-serif;
+}
+#main{
+    background-image:url('/home_main_pic.jpg');
+    height: 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+#allExe{
+    background-image:url('/allExercisesPic.jpeg');
+    height: 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+

@@ -30,7 +30,6 @@ app.post('/', async (req, res) => {
 app.post('/exercise', async (req, res) => {
     const chosenExercise = req.body.exercise;
     const exercise = await Exercise.findOne({ "name": chosenExercise });
-    console.log(exercise);
     res.render('showExercise', { exercise });
 })
 app.post('/admin', (req, res) => {
