@@ -43,7 +43,7 @@ app.post('/admin', (req, res) => {
     }
 })
 
-app.get('/createExercise', async (req, res) => {
+app.get('/createExercise', (req, res) => {
     res.render('createExercise');
 })
 
