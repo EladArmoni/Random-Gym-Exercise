@@ -6,7 +6,7 @@ const Exercise = require('./models/Exercise');
 const dotenv=require('dotenv');
 dotenv.config(); 
 
-const dbUrl=process.env.DB_URL||'mongodb://localhost:27017/gym-exercises';
+const dbUrl=process.env.DB_URL;
 mongoose.connect(dbUrl , { useNewUrlParser: true, })
     .then(() => {
         console.log("Database connected");
@@ -69,7 +69,7 @@ function randomExercise(exercises) {
     return exercises[index];
 }
 
-const port =process.env.PORT||3000;
+const port =3000;
 app.listen(port, () => {
     console.log(`Serving on port ${port}`)
 });
