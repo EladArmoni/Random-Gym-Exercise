@@ -8,7 +8,7 @@
             <div class="row align-items-center text-light p-5" id="allExe">
                 <div class="container-fluid col-md-6 text-center">
                     <h1 class="m-5">All Exercises</h1>
-                    <form action='/exercise' method="post">
+                    <form action='/exercise' method="get">
                         <select class="form-select" aria-label="Default select example" name="exercise">
                             <% for(let exercise of exercises){ %>
                                 <option name=" <%= exercise.name%>">
@@ -16,7 +16,7 @@
                                 </option>
                                 <% } %>
                         </select>
-                        <button type="submit" class="btn btn-primary p-2 m-4">Give Me Details</button>
+                        <button type="submit" class="btn btn-primary p-2 m-4">GO</button>
                     </form>
                 </div>
             </div>

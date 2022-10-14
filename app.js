@@ -21,39 +21,20 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 app.get('/', (req, res) => {
-    res.render('home')
+    const muscles=["Legs","Back","Chest","Shoulders","Biceps","Triceps"];
+    res.render('home',{muscles});
 })
 
-app.post('/', async (req, res) => {
-    const chosenMuscle = req.body.muscle;
+app.get('/type', async (req, res) => {
+    const chosenMuscle = req.query.muscle;
     const exercises = await Exercise.find({ "muscle": chosenMuscle });
     const random = randomExercise(exercises);
     res.render('random', { random });
 })
-app.post('/exercise', async (req, res) => {
-    const chosenExercise = req.body.exercise;
+app.get('/exercise', async (req, res) => {
+    const chosenExercise = req.query.exercise;
     const exercise = await Exercise.findOne({ "name": chosenExercise });
     res.render('showExercise', { exercise });
-})
-app.post('/admin', async (req, res) => {
-    const email = req.body.Email;
-    const password = req.body.Password;
-
-    if (email === 'eladarmoni96@gmail.com' && password === 'Elad123') {
-        res.redirect('createExercise');
-    }
-    else {
-        res.render('invalid');
-    }
-    })
-app.get('/createExercise', (req, res) => {
-    res.render('createExercise');
-})
-
-app.post('/createExercise', async (req, res) => {
-    const exercise = new Exercise(req.body);
-    await exercise.save();
-    res.redirect('/confirmation');
 })
 
 app.get('/confirmation', (req, res) => {
