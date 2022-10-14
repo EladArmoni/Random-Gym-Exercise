@@ -4,6 +4,7 @@ const path = require('path');
 const mongoose = require('mongoose');
 const Exercise = require('./models/Exercise');
 const dotenv=require('dotenv');
+const Admin = require('./models/Admin');
 dotenv.config(); 
 
 const dbUrl=process.env.DB_URL;
@@ -35,17 +36,17 @@ app.post('/exercise', async (req, res) => {
     const exercise = await Exercise.findOne({ "name": chosenExercise });
     res.render('showExercise', { exercise });
 })
-app.post('/admin', (req, res) => {
+app.post('/admin', async (req, res) => {
     const email = req.body.Email;
     const password = req.body.Password;
+
     if (email === 'eladarmoni96@gmail.com' && password === 'Elad123') {
         res.redirect('createExercise');
     }
     else {
         res.render('invalid');
     }
-})
-
+    })
 app.get('/createExercise', (req, res) => {
     res.render('createExercise');
 })
