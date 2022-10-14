@@ -4,7 +4,6 @@ const path = require('path');
 const mongoose = require('mongoose');
 const Exercise = require('./models/Exercise');
 const dotenv=require('dotenv');
-const Admin = require('./models/Admin');
 dotenv.config(); 
 
 const dbUrl=process.env.DB_URL;
