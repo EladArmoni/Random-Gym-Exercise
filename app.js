@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const Exercise = require('./models/Exercise');
 require('dotenv').config(); 
 
-const dbUrl=process.env.MONGODB_URI;
+const dbUrl=process.env.DB_URL;
 mongoose.connect(dbUrl , { useNewUrlParser: true, })
     .then(() => {
         console.log("Database connected");
