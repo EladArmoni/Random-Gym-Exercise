@@ -1,9 +1,5 @@
 <%-include('partials/header')%>
 
-    <title> <%=exercise.name%></title>
-    <link rel="icon" href="/dumbbell_icon.png" type="image/icon type">
-    </head>
-
     <body class=" bg-dark text-light">
         <%-include('partials/navbar')%>
             <div class="row m-5 pt-5">
@@ -20,10 +16,9 @@
                             <p class="card-text">Difficulty: <%=exercise.difficulty%>
                             </p>
                             <div class="ratio ratio-16x9">
-                                <iframe src="<%=exercise.description%>&autoplay=1&mute=1" title="YouTube video player"
+                                <iframe allowfullscreen src="<%=exercise.description%>&autoplay=1&mute=1" title="YouTube video player"
                                     frameborder="0"
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                    allowfullscreen></iframe>
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
                             </div>
                         </div>
                     </div>

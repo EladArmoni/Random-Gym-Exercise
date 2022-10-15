@@ -22,7 +22,12 @@ app.use(express.static("public"));
 
 app.get('/', (req, res) => {
     const muscles=["Legs","Back","Chest","Shoulders","Biceps","Triceps"];
-    res.render('home',{muscles});
+    res.render('home');
+})
+
+app.get('/muscles', (req, res) => {
+    const muscles=["Legs","Back","Chest","Shoulders","Biceps","Triceps"];
+    res.render('muscles',{muscles});
 })
 
 app.get('/type', async (req, res) => {
