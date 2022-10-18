@@ -2,10 +2,10 @@
 
     <body>
         <%-include('partials/navbar')%>
-                <div class=" pb-5 pt-5" style="background-color: #06283D;">
+                <div class="pb-5 pt-5" style="background-color: #06283D;">
                     <form action="/type" method="get">
                         <div class="container-fluid text-center mx-w-75">
-                            <div class="row">
+                            <div class="row ">
                                 <h1 class="h1 text-light pt-5 pb-4">Choose The Muscle You Want To Work On</h1>
                                 <% for(let muscle of muscles){%>
                                     <div class="col-6 col-md-4 p-1">
@@ -19,8 +19,3 @@
                     </form>
             </div>
 <%-include('partials/footer')%>
-
-<div class="row g-0 text-center">
-    <div class="col-sm-6 col-md-8">.col-sm-6 .col-md-8</div>
-    <div class="col-6 col-md-4">.col-6 .col-md-4</div>
-  </div>
