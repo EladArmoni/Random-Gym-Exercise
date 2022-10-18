@@ -21,33 +21,63 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 app.get('/', (req, res) => {
-    const muscles=["Legs","Back","Chest","Shoulders","Biceps","Triceps"];
-    res.render('home');
+    try{
+        const muscles=["Legs","Back","Chest","Shoulders","Biceps","Triceps"];
+        res.render('home');
+    }
+    catch{
+        res.render('error');
+    }
 })
 
 app.get('/muscles', (req, res) => {
-    const muscles=["Legs","Back","Chest","Shoulders","Biceps","Triceps"];
-    res.render('muscles',{muscles});
+    try{
+        const muscles=["Legs","Back","Chest","Shoulders","Biceps","Triceps"];
+        res.render('muscles',{muscles});
+    }
+    catch{
+        res.render('error');
+    }
 })
 
 app.get('/type', async (req, res) => {
-    const chosenMuscle = req.query.muscle;
-    const exercises = await Exercise.find({ "muscle": chosenMuscle });
-    const random = randomExercise(exercises);
-    res.render('random', { random });
+    try{
+        const chosenMuscle = req.query.muscle;
+        const exercises = await Exercise.find({ "muscle": chosenMuscle });
+        const random = randomExercise(exercises);
+        res.render('random', { random });
+    }
+    catch{
+        res.render('error');
+    }
 })
 app.get('/exercise', async (req, res) => {
-    const chosenExercise = req.query.exercise;
-    const exercise = await Exercise.findOne({ "name": chosenExercise });
-    res.render('showExercise', { exercise });
+    try{
+        const chosenExercise = req.query.exercise;
+        const exercise = await Exercise.findOne({ "name": chosenExercise });
+        res.render('showExercise', { exercise });
+    }
+    catch{
+        res.render('error');
+    }
 })
 
 app.get('/confirmation', (req, res) => {
-    res.render('confirmation');
+    try{
+        res.render('confirmation');
+    }
+    catch{
+        res.render('error');
+    }
 })
 app.get('/showAll', async (req, res) => {
-    const exercises = await Exercise.find({});
-    res.render('showAll', { exercises });
+    try{
+        const exercises = await Exercise.find({});
+        res.render('showAll', { exercises });
+    }
+    catch{
+        res.render('error');
+    }
 })
 
 function randomExercise(exercises) {
