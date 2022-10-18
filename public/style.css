@@ -27,7 +27,9 @@ nav{
 @media (min-width: 1000px) {
     .mx-w-75 {
       max-width: 75% !important;
-    }
+      margin-left: auto;
+      margin-right: auto;
+        }
 }
 
 @media (min-width: 1000px) {
