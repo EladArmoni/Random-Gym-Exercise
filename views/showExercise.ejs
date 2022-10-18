@@ -1,29 +1,29 @@
 <%-include('partials/header')%>
 
-    <body class=" bg-dark text-light">
-        <%-include('partials/navbar')%>
-        <div class="container-fluid">
-            <div class="row align-items-center" style="height: 90vh;">
-                <div class="container-fluid col-md-6">
-                    <div class="card text-center bg-dark">
-                        <div class="card-header bg-light ">
-                            <h1 class="text-primary">
-                                <%=exercise.name%>
-                            </h1>
-                        </div>
-                        <div class="card-body">
-                            <h4 class="card-title">Main Muscle: <%=exercise.muscle%>
-                            </h4>
-                            <p class="card-text">Difficulty: <%=exercise.difficulty%>
-                            </p>
-                            <div class="ratio ratio-16x9">
-                                <iframe allowfullscreen src="<%=exercise.description%>&autoplay=1&mute=1" title="YouTube video player"
-                                    frameborder="0"
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
-                            </div>
+<body class=" bg-dark text-light">
+    <%-include('partials/navbar')%>
+    <div class="container-fluid pt-5">
+        <div class="row align-items-center pt-5 pb-5">
+            <div class="container-fluid col-md-6">
+                <div class="card text-center bg-dark">
+                    <div class="card-header bg-light ">
+                        <h1 class="text-primary">
+                            <%=exercise.name%>
+                        </h1>
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">Main Muscle: <%=exercise.muscle%>
+                        </h4>
+                        <p class="card-text">Difficulty: <%=exercise.difficulty%>
+                        </p>
+                        <div class="ratio ratio-16x9">
+                            <iframe allowfullscreen src="<%=exercise.description%>&autoplay=1&mute=1" title="YouTube video player"
+                                frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <%-include('partials/footer')%>
+    </div>
+    <%-include('partials/footer')%>
