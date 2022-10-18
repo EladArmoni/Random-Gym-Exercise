@@ -2,10 +2,11 @@
 
     <body class=" bg-dark text-light">
         <%-include('partials/navbar')%>
-            <div class="row m-5 pt-5">
-                <div class="container-fluid align-items-center justify-content-center col-md-6">
+        <div class="container-fluid">
+            <div class="row align-items-center" style="height: 90vh;">
+                <div class="container-fluid col-md-6">
                     <div class="card text-center bg-dark">
-                        <div class="card-header bg-light">
+                        <div class="card-header bg-light ">
                             <h1 class="text-primary">
                                 <%=exercise.name%>
                             </h1>
@@ -24,4 +25,5 @@
                     </div>
                 </div>
             </div>
-<%-include('partials/footer')%>
+        </div>
+        <%-include('partials/footer')%>
