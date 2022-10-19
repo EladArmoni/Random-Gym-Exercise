@@ -2,9 +2,8 @@
  
     <body>
         <%-include('partials/navbar')%>
-        <div class="container-fluid">
-            <div class="row align-items-center text-light p-5" id="allExe">
-                <div class="container-fluid col-md-6 text-center">
+        <div class="container-fluid text-light p-5 position-relative background" id="allExe">
+                <div class="position-absolute top-50 start-50 translate-middle text-center">
                     <h1 class="m-5">All Exercises</h1>
                     <form action='/exercise' method="get">
                         <select class="form-select" aria-label="Default select example" name="exercise">
@@ -17,5 +16,5 @@
                         <button type="submit" class="btn btn-primary p-2 m-4">GO</button>
                     </form>
                 </div>
-            </div>
+        </div>
 <%-include('partials/footer')%>

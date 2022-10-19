@@ -20,9 +20,9 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
+const muscles=["Legs","Back","Chest","Shoulders","Biceps","Triceps"];
 app.get('/', (req, res) => {
     try{
-        const muscles=["Legs","Back","Chest","Shoulders","Biceps","Triceps"];
         res.render('home');
     }
     catch{
@@ -32,7 +32,6 @@ app.get('/', (req, res) => {
 
 app.get('/muscles', (req, res) => {
     try{
-        const muscles=["Legs","Back","Chest","Shoulders","Biceps","Triceps"];
         res.render('muscles',{muscles});
     }
     catch{
