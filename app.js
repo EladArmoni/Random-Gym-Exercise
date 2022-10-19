@@ -6,6 +6,7 @@ const Exercise = require('./models/Exercise');
 const dotenv=require('dotenv');
 dotenv.config(); 
 
+//mongoDB connection
 const dbUrl=process.env.DB_URL;
 mongoose.connect(dbUrl ,{ useNewUrlParser: true})
     .then(() => {
@@ -15,12 +16,16 @@ mongoose.connect(dbUrl ,{ useNewUrlParser: true})
         console.log("Error while connected to DB!",err);
     })
 
+//set engine to ejs
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 const muscles=["Legs","Back","Chest","Shoulders","Biceps","Triceps"];
+
+//home page get route
 app.get('/', (req, res) => {
     try{
         res.render('home');
@@ -30,6 +35,7 @@ app.get('/', (req, res) => {
     }
 })
 
+//muscles page get route
 app.get('/muscles', (req, res) => {
     try{
         res.render('muscles',{muscles});
@@ -39,6 +45,7 @@ app.get('/muscles', (req, res) => {
     }
 })
 
+//random exercise page get route
 app.get('/type', async (req, res) => {
     try{
         const chosenMuscle = req.query.muscle;
@@ -50,6 +57,8 @@ app.get('/type', async (req, res) => {
         res.render('error');
     }
 })
+
+//specific exercise page get route
 app.get('/exercise', async (req, res) => {
     try{
         const chosenExercise = req.query.exercise;
@@ -61,14 +70,7 @@ app.get('/exercise', async (req, res) => {
     }
 })
 
-app.get('/confirmation', (req, res) => {
-    try{
-        res.render('confirmation');
-    }
-    catch{
-        res.render('error');
-    }
-})
+//all exercises page get route
 app.get('/showAll', async (req, res) => {
     try{
         const exercises = await Exercise.find({});
@@ -79,6 +81,7 @@ app.get('/showAll', async (req, res) => {
     }
 })
 
+//random function
 function randomExercise(exercises) {
     const index = Math.floor(Math.random() * (exercises.length));
     return exercises[index];
