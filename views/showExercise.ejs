@@ -2,8 +2,8 @@
 
 <body class=" bg-dark text-light">
     <%-include('partials/navbar')%>
-        <div class="row align-items-center justify-content-center">
-            <div class="col-md-6 text-center pt-4 pb-5">
+        <div class="row align-items-center justify-content-center background">
+            <div class="col-lg-6 text-center pt-5 pb-5">
                 <h1 style="color:#019AF7 ;">
                     <%=exercise.name%>
                 </h1>
@@ -14,6 +14,11 @@
                         frameborder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
                 </div>
+                <%if(button){%>
+                    <form action="/type" method="get">
+                        <button class="btn btn-primary mt-5 p-2" type="submit" name="muscle" value="<%=exercise.muscle%>">Another Exercise</button>
+                    </form>
+                <%}%>
             </div>
         </div>
     <%-include('partials/footer')%>

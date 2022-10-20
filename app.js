@@ -45,29 +45,38 @@ app.get('/muscles', (req, res) => {
     }
 })
 
-//random exercise page get route
+let button=false;
+
+//random exercise
 app.get('/type', async (req, res) => {
     try{
+        button=true;
         const chosenMuscle = req.query.muscle;
         const exercises = await Exercise.find({ "muscle": chosenMuscle });
-        const random = randomExercise(exercises);
-        res.render('random', { random });
+        const exercise = randomExercise(exercises);
+        res.render('showExercise', { exercise ,button});
     }
     catch{
         res.render('error');
     }
 })
 
-//specific exercise page get route
+//specific exercise
 app.get('/exercise', async (req, res) => {
     try{
+        button=false;
         const chosenExercise = req.query.exercise;
         const exercise = await Exercise.findOne({ "name": chosenExercise });
-        res.render('showExercise', { exercise });
+        res.render('showExercise', { exercise,button });
     }
     catch{
         res.render('error');
     }
+})
+
+//error page get route
+app.get('/error', async (req, res) => {
+    res.render('error')
 })
 
 //all exercises page get route
