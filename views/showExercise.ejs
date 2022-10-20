@@ -2,21 +2,21 @@
 
 <body class=" bg-dark text-light">
     <%-include('partials/navbar')%>
-        <div class="row align-items-center justify-content-center background">
+        <div class="row align-items-center justify-content-center background mb-5">
             <div class="col-lg-6 text-center pt-5 pb-5">
                 <h1 style="color:#019AF7 ;">
                     <%=exercise.name%>
                 </h1>
                 <h4 class="card-title">Main Muscle: <%=exercise.muscle%></h4>
                 <p class="card-text">Difficulty: <%=exercise.difficulty%></p>
-                <div class="ratio ratio-16x9 ">
+                <div class="ratio ratio-16x9 mb-3">
                     <iframe allowfullscreen src="<%=exercise.description%>&autoplay=1&mute=1" title="YouTube video player"
                         frameborder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
                 </div>
                 <%if(button){%>
                     <form action="/type" method="get">
-                        <button class="btn btn-primary mt-5 p-2" type="submit" name="muscle" value="<%=exercise.muscle%>">Another Exercise</button>
+                        <button class="btn btn-primary mb-5 mt-4" type="submit" name="muscle" value="<%=exercise.muscle%>">Another Exercise</button>
                     </form>
                 <%}%>
             </div>
