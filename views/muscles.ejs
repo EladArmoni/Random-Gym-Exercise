@@ -2,9 +2,9 @@
 
     <body>
         <%-include('partials/navbar')%>
-        <div class="container-fluid text-center pb-5 mx-w-75" style="background-color: #06283D;">
+        <div class="container-fluid text-center pb-5" style="background-color: #06283D;">
             <h1 class="h1 text-light pt-4 pb-4 f-size">Choose The Muscle You Want To Work On</h1>
-            <form action="/type" method="get" class="row justify-content-center align-items-center">
+            <form action="/type" method="get" class="row justify-content-center align-items-center mx-w-75">
                 <% for(let muscle of muscles){%>
                     <div class="col-6 col-md-4 p-1">
                         <button class="btn btn-outline-light" type="submit" name="muscle"
