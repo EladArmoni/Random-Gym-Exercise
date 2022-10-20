@@ -3,7 +3,7 @@
 <body class=" bg-dark text-light">
     <%-include('partials/navbar')%>
     <div class="container-fluid">
-        <div class="row justify-content-center background mt-4">
+        <div class="row justify-content-center background mt-4 mb-5">
             <div class="col-lg-6 text-center">
                 <h1 class="mb-4" style="color:#019AF7 ;">
                     <%=exercise.name%>
@@ -16,9 +16,9 @@
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
                 </div>
                 <%if(button){%>
-                    <form action="/type" method="get" class="mb-5">
-                        <button class="btn btn-primary mb-5 mt-4" type="submit" name="muscle" value="<%=exercise.muscle%>">Another Exercise</button>
-                    </form>
+                        <form action="/type" method="get">
+                            <button class="btn btn-primary mb-5 mt-4" type="submit" name="muscle" value="<%=exercise.muscle%>">Another Exercise</button>
+                        </form>
                 <%}%>
             </div>
         </div>
