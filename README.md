@@ -2,7 +2,6 @@
 The project offers random gym exercises according to muscle selection. The goal is to add a variety to your training. In addition, there is an option to choose a specific exercise and receive it’s instructions.
 Skills set: Node js, Express js, MongoDB, HTML, Bootstrap.
 
-https://radiant-badlands-31547.herokuapp.com/
 
 # WEB VIDEO
 
