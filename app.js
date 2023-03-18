@@ -28,7 +28,7 @@ const muscles = ["Legs", "Back", "Chest", "Shoulders", "Biceps", "Triceps"];
 //home page get route
 app.get('/', (req, res) => {
     try {
-        res.render('home');
+        res.render('home.ejs');
     }
     catch {
         res.render('error');
@@ -82,7 +82,7 @@ app.get('/error', async (req, res) => {
 //all exercises page get route
 app.get('/showAll', async (req, res) => {
     try {
-        const exercises = await Exercise.find({});
+        const exercises = await Exercise.find({}).sort({ muscle: 1, difficulty: 1 });
         res.render('showAll', { exercises });
     }
     catch {

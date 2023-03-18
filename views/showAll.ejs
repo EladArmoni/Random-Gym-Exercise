@@ -1,20 +1,26 @@
-<%-include('partials/header')%>
- 
+<%- include('partials/header') %>
+
     <body>
-        <%-include('partials/navbar')%>
-        <div class="container-fluid text-light p-5 background d-flex" id="allExe">
-            <div class="text-center m-auto">
+        <%- include('partials/navbar') %>
+            <div class="container-fluid text-light p-5 background d-flex" id="allExe">
+                <div class="text-center m-auto">
                     <h1 class="f-size pb-5">All Exercises</h1>
                     <form action='/exercise' method="get">
                         <select class="form-select" aria-label="Default select example" name="exercise">
-                            <% for(let exercise of exercises){ %>
-                                <option name=" <%= exercise.name%>">
-                                    <%= exercise.name%>
-                                </option>
-                                <% } %>
+                            <% let currentMuscle=null %>
+                                <% for(let exercise of exercises){ %>
+                                    <% if (exercise.muscle !==currentMuscle) { %>
+                                        <% currentMuscle=exercise.muscle %>
+                                            <optgroup label="<%= currentMuscle %>">
+                                                <% } %>
+                                                    <option name=" <%= exercise.name%>">
+                                                        <%= exercise.name%> - <%= exercise.difficulty%>
+                                                    </option>
+                                                    <% } %>
                         </select>
-                        <button type="submit" class="btn btn-primary p-2 mt-5">GO</button>
+                        <button type="submit" class="btn btn-primary p-2 mt-5">Start</button>
                     </form>
+                </div>
             </div>
-        </div>
-<%-include('partials/footer')%>
+            <%- include('partials/footer') %>
+    </body>

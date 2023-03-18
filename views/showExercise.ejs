@@ -21,7 +21,13 @@
                         <form action="/type" method="get">
                             <button class="btn btn-primary mb-5 mt-4" type="submit" name="muscle" value="<%=exercise.muscle%>">Another Exercise</button>
                         </form>
+                        <a class="nav-link active" aria-current="page" href="/muscles"><button class="btn btn-primary mb-5 mt-4" type="submit" name="muscle" value="<%=exercise.muscle%>">
+                        return back</button></a>
                 <%}%>
+                <%if(!button){%>
+                    <a class="nav-link active" aria-current="page" href="/showAll"><button class="btn btn-primary mb-5 mt-4" type="submit" name="muscle" value="<%=exercise.muscle%>">
+                        return back</button></a>
+                <% } %>
             </div>
         </div>
     </div>
