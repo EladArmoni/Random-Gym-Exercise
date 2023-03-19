@@ -16,6 +16,10 @@ mongoose.connect(dbUrl, { useNewUrlParser: true })
         console.log("Error while connected to DB!", err);
     })
 
+//middleware
+const notFoundMiddleware=require('./middleware/not-found.js')
+const errorHandlerMiddleware=require('./middleware/error-handler.js')
+
 //set engine to ejs
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -61,9 +65,8 @@ app.get('/showAll', async (req, res) => {
     res.render('showAll', { exercises });
 })
 
-app.use((req, res) => {
-    res.status(404).render('error')
-})
+app.use(notFoundMiddleware)
+app.use(errorHandlerMiddleware)
 
 //random function
 function randomExercise(exercises) {
