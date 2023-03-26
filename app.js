@@ -17,8 +17,8 @@ mongoose.connect(dbUrl, { useNewUrlParser: true })
     })
 
 //middleware
-const notFoundMiddleware=require('./middleware/not-found.js')
-const errorHandlerMiddleware=require('./middleware/error-handler.js')
+const notFoundMiddleware = require('./middleware/not-found.js')
+const errorHandlerMiddleware = require('./middleware/error-handler.js')
 
 //set engine to ejs
 app.set('view engine', 'ejs');
@@ -37,32 +37,46 @@ app.get('/', (req, res) => {
 //muscles page get route
 app.get('/muscles', (req, res) => {
     res.render('muscles', { muscles });
-
 })
 
 let button = false;
 
 //random exercise
-app.get('/type', async (req, res) => {
-    button = true;
-    const chosenMuscle = req.query.muscle;
-    const exercises = await Exercise.find({ "muscle": chosenMuscle });
-    const exercise = randomExercise(exercises);
-    res.render('showExercise', { exercise, button });
+app.get('/type', async (req, res, next) => {
+    try {
+        button = true;
+        const chosenMuscle = req.query.muscle;
+        const exercises = await Exercise.find({ "muscle": chosenMuscle });
+        const exercise = randomExercise(exercises);
+        res.render('showExercise', { exercise, button });
+    }
+    catch (error) {
+        next(error)
+    }
 })
 
 //specific exercise
-app.get('/exercise', async (req, res) => {
-    button = false;
-    const chosenExercise = req.query.exercise;
-    const exercise = await Exercise.findOne({ "name": chosenExercise });
-    res.render('showExercise', { exercise, button });
+app.get('/exercise', async (req, res, next) => {
+    try {
+        button = false;
+        const chosenExercise = req.query.exercise;
+        const exercise = await Exercise.findOne({ "name": chosenExercise });
+        res.render('showExercise', { exercise, button });
+    }
+    catch (error) {
+        next(error)
+    }
 })
 
 //all exercises page get route
-app.get('/showAll', async (req, res) => {
-    const exercises = await Exercise.find({}).sort({ muscle: 1, difficulty: 1 });
-    res.render('showAll', { exercises });
+app.get('/showAll', async (req, res, next) => {
+    try {
+        const exercises = await Exercise.find({}).sort({ muscle: 1, difficulty: 1 });
+        res.render('showAll', { exercises });
+    }
+    catch (error) {
+        next(error)
+    }
 })
 
 app.use(notFoundMiddleware)
