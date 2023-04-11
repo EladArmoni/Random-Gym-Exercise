@@ -34,12 +34,15 @@ const AllExercises = () => {
                             return (
                                 <optgroup label={muscle} key={muscle} >
                                     {exercises.map((exercise) => {
-                                        if(exercise.muscle==muscle){
+                                        if(exercise.muscle===muscle){
                                         return(
                                         <option className='option' value={exercise.name} key={exercise._id}>
                                             {exercise.name}
                                         </option>
                                         );}
+                                        else{
+                                            return;
+                                        }
                                     })};
                                 </optgroup>
                             )
