@@ -5,9 +5,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "concurrently \"npm run server\" \"npm run client\"",
-    "server": "node server.js",
-    "client": "cd client && npm start"
+    "start": "nodemon server.js",
+    "dev": "node server.js",
+    "build": "npm i"
   },
   "keywords": [],
   "author": "",
