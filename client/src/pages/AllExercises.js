@@ -31,22 +31,21 @@ const AllExercises = () => {
                     <h1 className="f-size pb-5">All Exercises</h1>
                     <select className="form-select" aria-label="Default select example" name="exercise" onChange={(e) => setSelectedExercise(e.target.value)}>
                         {muscles.map((muscle) => {
-                            return (
-                                <optgroup label={muscle} key={muscle} >
-                                    {exercises.map((exercise) => {
-                                        if(exercise.muscle===muscle){
-                                        return(
-                                        <option className='option' value={exercise.name} key={exercise._id}>
-                                            {exercise.name}
-                                        </option>
-                                        );}
-                                        else{
-                                            return;
-                                        }
-                                    })};
-                                </optgroup>
-                            )
-                        })};
+                            const filteredExercises = exercises.filter((exercise) => exercise.muscle === muscle);
+                            if(filteredExercises.length > 0) {
+                                return (
+                                    <optgroup label={muscle} key={muscle}>
+                                        {filteredExercises.map((exercise) => (
+                                            <option className='option' value={exercise.name} key={exercise._id}>
+                                                {exercise.name}
+                                            </option>
+                                        ))}
+                                    </optgroup>
+                                );
+                            } else {
+                                return null;
+                            }
+                        })}
                     </select>
                     <Link to="/random-exercise" state={{ muscle: null, exercise: selectedExercise }}>
                         <button className='btn btn-primary mt-5'>Exercise Video</button>
