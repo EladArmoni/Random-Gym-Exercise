@@ -1,4 +1,5 @@
-# Random Exercise app is live now! https://randomexercise.netlify.app  
+Random Exercise app is live now!🥳 
+https://randomexercise.netlify.app/  
 
 # Random gym exercise project
 The project offers random gym exercises according to muscle selection. The goal is to add a variety to your training. In addition, there is an option to choose a specific exercise and receive it’s instructions.
