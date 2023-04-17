@@ -12,7 +12,7 @@ const AllExercises = () => {
     useEffect(() => {
         async function fetchExercises() {
             try {
-                const response = await fetch('http://localhost:5000/api/exercise/');
+                const response = await fetch('https://random-exercise.onrender.com/api/exercise/');
                 const data = await response.json();
                 setExercises(data);
             } catch (error) {

@@ -16,7 +16,7 @@ const Exercise = () => {
         setExercise({});
         if (!muscle) {
             console.log(specificExercise);
-            fetch(`http://localhost:5000/api/exercise/${specificExercise}`)
+            fetch(`https://random-exercise.onrender.com/api/exercise/${specificExercise}`)
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Failed to fetch exercise');
@@ -32,7 +32,7 @@ const Exercise = () => {
                     setIsLoading(false);
                 });
         } else {
-            fetch(`http://localhost:5000/api/exercise/muscle/${muscle}`)
+            fetch(`https://random-exercise.onrender.com/api/exercise/muscle/${muscle}`)
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Failed to fetch exercise');
