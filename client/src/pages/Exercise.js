@@ -15,7 +15,7 @@ const Exercise = () => {
         setError(null);
         setExercise({});
         if (!muscle) {
-            if (localStorage[specificExercise] != undefined) {
+            if (localStorage[specificExercise] !== undefined) {
                 setExercise(JSON.parse(localStorage[specificExercise]));
                 setIsLoading(false);
             }
@@ -80,9 +80,9 @@ const Exercise = () => {
         return (
             <>
                 <Navbar />
-                <div className="container-fluid text-center" style={{ height:'100vh', backgroundColor: "#061118", color: "white" }}>
-                    <div style={{width:'50px'}} className='m-auto pt-5'>
-                    <Loading type='spin' color='white'/>
+                <div className="container-fluid text-center" style={{ height: '100vh', backgroundColor: "#061118", color: "white" }}>
+                    <div style={{ width: '50px' }} className='m-auto pt-5'>
+                        <Loading type='spin' color='white' />
                     </div>
                 </div>
                 <Footer />

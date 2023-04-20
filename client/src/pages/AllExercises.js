@@ -12,7 +12,7 @@ const AllExercises = () => {
     useEffect(() => {
         async function fetchExercises() {
             try {
-                if (localStorage["exercises"] != undefined) {
+                if (localStorage["exercises"] !== undefined) {
                     setExercises(JSON.parse(localStorage["exercises"]));
                 }
                 else {
