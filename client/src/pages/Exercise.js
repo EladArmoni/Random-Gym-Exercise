@@ -1,4 +1,4 @@
-import { Navbar, Footer } from '../components';
+import { Navbar, Footer, Loading } from '../components';
 import { useLocation } from "react-router-dom";
 import { useState, useEffect, useCallback } from "react";
 
@@ -15,22 +15,29 @@ const Exercise = () => {
         setError(null);
         setExercise({});
         if (!muscle) {
-            console.log(specificExercise);
-            fetch(`https://random-exercise.onrender.com/api/exercise/${specificExercise}`)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Failed to fetch exercise');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    setExercise(data);
-                    setIsLoading(false);
-                })
-                .catch(error => {
-                    setError(error.message);
-                    setIsLoading(false);
-                });
+            if (localStorage[specificExercise] != undefined) {
+                setExercise(JSON.parse(localStorage[specificExercise]));
+                setIsLoading(false);
+            }
+            else {
+                console.log(specificExercise)
+                fetch(`https://random-exercise.onrender.com/api/exercise/${specificExercise}`)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Failed to fetch exercise');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        setExercise(data);
+                        localStorage[specificExercise] = JSON.stringify(data);
+                        setIsLoading(false);
+                    })
+                    .catch(error => {
+                        setError(error.message);
+                        setIsLoading(false);
+                    });
+            }
         } else {
             fetch(`https://random-exercise.onrender.com/api/exercise/muscle/${muscle}`)
                 .then(response => {
@@ -70,7 +77,17 @@ const Exercise = () => {
     );
 
     if (isLoading) {
-        return <p>Loading exercise data...</p>;
+        return (
+            <>
+                <Navbar />
+                <div className="container-fluid text-center" style={{ height:'100vh', backgroundColor: "#061118", color: "white" }}>
+                    <div style={{width:'50px'}} className='m-auto pt-5'>
+                    <Loading type='spin' color='white'/>
+                    </div>
+                </div>
+                <Footer />
+            </>
+        )
     }
 
     if (error) {

@@ -1,4 +1,5 @@
 import Logo from './Logo.js'
 import Navbar from './Navbar.js'
 import Footer from './Footer.js'
-export { Navbar,Logo,Footer }
+import Loading from './Loading.js'
+export { Navbar,Logo,Footer,Loading}
