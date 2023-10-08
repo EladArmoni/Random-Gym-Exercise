@@ -20,7 +20,6 @@ const Exercise = () => {
                 setIsLoading(false);
             }
             else {
-                console.log(specificExercise)
                 fetch(`https://random-exercise.onrender.com/api/exercise/${specificExercise}`)
                     .then(response => {
                         if (!response.ok) {

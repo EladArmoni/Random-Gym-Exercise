@@ -13,6 +13,7 @@ nav {
     transform: translateZ(0);
     width: 100%;
     z-index: 999;
+    text-align: center;
 }
 
 #footer {
@@ -28,9 +29,14 @@ nav {
 .footer-link {
     color: #019AF7;
 }
-
+.navbar-nav{
+    padding-right: 50px;
+    text-align: center;
+}
 .nav-link {
     color: white;
+    text-align: center;
+    margin: 0px 10px;
 }
 
 .nav-link:hover {
