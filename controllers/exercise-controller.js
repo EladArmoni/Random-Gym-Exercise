@@ -16,12 +16,14 @@ const getAllExercises = async (req, res, next) => {
 const getRandomExercise = async (req, res, next) => {
     try {
         const muscle = req.params.muscle;
-        const exercises = await Exercise.find({ "muscle": muscle });
-        if (exercises.length == 0)
+        const randomExercise = await Exercise.aggregate([
+            { $match: { muscle: muscle } },
+            { $sample: { size: 1 } }
+        ]);
+        if (!randomExercise)
             res.status(404).json({ "msg": "No exercises was found" });
         else {
-            const exercise = randomExercise(exercises);
-            res.status(200).json(exercise);
+            res.status(200).json(randomExercise);
         }
     }
     catch (error) {
@@ -42,12 +44,6 @@ const getExerciseByName = async (req, res, next) => {
     catch (error) {
         next(error)
     }
-}
-
-//Generate random exercise
-function randomExercise(exercises) {
-    const index = Math.floor(Math.random() * (exercises.length));
-    return exercises[index];
 }
 
 export { getAllExercises, getRandomExercise, getExerciseByName }

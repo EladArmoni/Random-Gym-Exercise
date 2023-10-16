@@ -102,11 +102,11 @@ nav {
 
 #main {
     background-image: url('../images/home_main_pic2.jpg');
+    width: fit-content;
 }
 
 #allExe {
     background-image: url('../images/allExercisesPic.jpg');
-    height: auto;
 }
 
 #mainHeader {
