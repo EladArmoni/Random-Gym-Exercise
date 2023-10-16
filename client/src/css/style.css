@@ -1,5 +1,6 @@
 body {
-    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    background-color: black;
 }
 
 nav {
@@ -39,7 +40,7 @@ nav {
 }
 
 .navbar-nav {
-    padding-right: 42px;
+    padding-right: 70px;
 }
 
 .nav-link {
