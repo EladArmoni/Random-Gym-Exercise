@@ -1,5 +1,5 @@
 body {
-    font-family: 'Inter', sans-serif;
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif
 }
 
 nav {
@@ -26,13 +26,22 @@ nav {
     background-size: cover;
 }
 
+#loader_container {
+    display: flex;
+    justify-content: center;
+    /* Center horizontally */
+    align-items: center;
+    height: 100vh;
+}
+
 .footer-link {
     color: #019AF7;
 }
-.navbar-nav{
-    padding-right: 50px;
-    text-align: center;
+
+.navbar-nav {
+    padding-right: 42px;
 }
+
 .nav-link {
     color: white;
     text-align: center;
@@ -41,6 +50,16 @@ nav {
 
 .nav-link:hover {
     color: #019AF7;
+}
+
+@media (max-width: 900px) {
+    .navbar-nav {
+        padding-right: 0px;
+    }
+
+    .nav-link {
+        text-align: left;
+    }
 }
 
 .muscles-div {

@@ -79,8 +79,8 @@ const Exercise = () => {
         return (
             <>
                 <Navbar />
-                <div className="container-fluid text-center" style={{ height: '100vh', backgroundColor: "#061118", color: "white" }}>
-                    <div style={{ width: '50px' }} className='m-auto pt-5'>
+                <div id='loader_container' className="container-fluid text-center" style={{ height: '100vh', backgroundColor: "#061118", color: "white" }}>
+                    <div style={{ width: '100px' }} id='loader'>
                         <Loading type='spin' color='white' />
                     </div>
                 </div>
