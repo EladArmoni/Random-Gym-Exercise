@@ -2,7 +2,7 @@ import { Navbar } from '../components';
 import { Footer } from '../components';
 
 const Home = () => {
-    
+    fetch('https://random-exercise.onrender.com/api/exercise/')
     return (
         <>
             <Navbar />
