@@ -11,10 +11,5 @@ services:
       context: .
     ports:
       - "5000:5000"
-    depends_on:
-      - db
     environment:
       DB_URL: mongodb+srv://eladarmoni:Elad23531@cluster0.fjyltyn.mongodb.net/?retryWrites=true&w=majority
-
-  db:
-    image: mongo
