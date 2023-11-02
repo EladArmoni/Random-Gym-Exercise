@@ -1,4 +1,4 @@
-import { Navbar, Footer, Loading } from '../components';
+import {Loading } from '../components';
 import { useLocation } from "react-router-dom";
 import { useState, useEffect, useCallback } from "react";
 
@@ -10,14 +10,12 @@ const Exercise = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    const fetchExercise = useCallback(() => {
-        setIsLoading(true);
-        setError(null);
-        setExercise({});
+    const fetchExercise =() => {
         if (!muscle) {
             if (localStorage[specificExercise] !== undefined) {
                 setExercise(JSON.parse(localStorage[specificExercise]));
                 setIsLoading(false);
+                return;
             }
             else {
                 fetch(`https://random-exercise.onrender.com/api/exercise/${specificExercise}`)
@@ -31,6 +29,7 @@ const Exercise = () => {
                         setExercise(data);
                         localStorage[specificExercise] = JSON.stringify(data);
                         setIsLoading(false);
+                        return;
                     })
                     .catch(error => {
                         setError(error.message);
@@ -48,17 +47,18 @@ const Exercise = () => {
                 .then(data => {
                     setExercise(data);
                     setIsLoading(false);
+                    return;
                 })
                 .catch(error => {
                     setError(error.message);
                     setIsLoading(false);
                 });
         }
-    }, [muscle, specificExercise]);
+    };
 
     useEffect(() => {
         fetchExercise();
-    }, [fetchExercise]);
+    }, []);
 
     const showAnotherExerciseButton = muscle ? (
         <>
@@ -78,13 +78,11 @@ const Exercise = () => {
     if (isLoading) {
         return (
             <>
-                <Navbar />
                 <div id='loader_container' className="container-fluid text-center" style={{ height: '100vh', backgroundColor: "#061118", color: "white" }}>
                     <div style={{ width: '100px' }} id='loader'>
                         <Loading type='spin' color='white' />
                     </div>
                 </div>
-                <Footer />
             </>
         )
     }
@@ -100,7 +98,6 @@ const Exercise = () => {
 
     return (
         <>
-            <Navbar />
             <div className="container-fluid" style={{ backgroundColor: "#061118", color: "white" }}>
                 <div className="row justify-content-center text-center">
                     <h1 className="mb-2 mt-4" style={{ color: "#019AF7" }}>
@@ -126,7 +123,6 @@ const Exercise = () => {
                     </div>
                 </div>
             </div>
-            <Footer />
         </>)
 };
 export default Exercise; 

@@ -1,5 +1,3 @@
-import { Navbar } from '../components';
-import { Footer } from '../components';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -31,7 +29,6 @@ const AllExercises = () => {
 
     return (
         <>
-            <Navbar />
             <div className="container-fluid text-light p-5 background d-flex" id="allExe">
                 <div className="text-center m-auto">
                     <h1 className="f-size pb-5">All Exercises</h1>
@@ -59,7 +56,6 @@ const AllExercises = () => {
                     </Link>
                 </div>
             </div>
-            <Footer />
         </>
     );
 };

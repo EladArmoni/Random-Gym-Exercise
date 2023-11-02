@@ -4,7 +4,7 @@ const Navbar = () => {
         <nav className="navbar navbar-expand-lg navbar-dark bg-black">
             <div className="container-fluid mx-1">
                 <a className="navbar-brand" href="/">
-                    <Logo/>
+                    <Logo />
                 </a>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
                     aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
