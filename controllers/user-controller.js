@@ -1,9 +1,9 @@
 import User from "../models/User.js";
 
 const signupUser = async (req, res, next) => {
-    const { userEmail, userPassword, userFirstName, userLastName } = req.body;
+    const { email, password, firstName, lastName } = req.body;
     // Check if a user with the same email already exists
-    User.findOne({ email: userEmail }, (err, existingUser) => {
+    User.findOne({ email: email }, (err, existingUser) => {
         if (err) {
             // Handle the error
             next(err);
@@ -17,10 +17,10 @@ const signupUser = async (req, res, next) => {
         else {
             // Create a new user if no user with the same email is found
             const newUser = new User({
-                email: userEmail,
-                password: userPassword,
-                firstName: userFirstName,
-                lastName: userLastName
+                email: email,
+                password: password,
+                firstName: firstName,
+                lastName: lastName
             });
 
             newUser.save()
@@ -35,17 +35,17 @@ const signupUser = async (req, res, next) => {
 }
 
 const loginUser = async (req, res, next) => {
-    const { userEmail, userPassword } = req.body;
+    const { email, password } = req.body;
     try{
         // Check if the user exists in your databases
-        const user = await User.findOne({ email: userEmail });
+        const user = await User.findOne({ email: email });
     
         if (!user) {
             res.status(401).json({ message: 'User with this email does not exist'});
         }
     
         // Check if the provided password matches the stored password
-        if (user.password!=userPassword) {
+        if (user.password!=password) {
             res.status(401).json({ message: 'Invalid password' });
         }
         //user logged in successfully
