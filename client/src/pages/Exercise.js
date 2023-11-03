@@ -1,6 +1,6 @@
 import { Loading } from '../components';
 import { useLocation } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState,useEffect} from "react";
 import Button from '../components/Button';
 // import Swal from 'sweetalert2';
 
@@ -83,7 +83,7 @@ const Exercise = () => {
 
     useEffect(() => {
         fetchExercise();
-    }, [fetchExercise]);
+    });
 
     const showAnotherExerciseButton = muscle ? (
         <>
