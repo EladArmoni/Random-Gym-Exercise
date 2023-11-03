@@ -1,6 +1,6 @@
 import { Loading } from '../components';
 import { useLocation } from "react-router-dom";
-import { useState,useEffect} from "react";
+import { useState, useEffect, useCallback } from "react";
 import Button from '../components/Button';
 // import Swal from 'sweetalert2';
 
@@ -36,15 +36,34 @@ const Exercise = () => {
     //         }
     //     );
     // }
-    const fetchExercise = () => {
-        if (!muscle) {
-            if (localStorage[specificExercise] !== undefined) {
-                setExercise(JSON.parse(localStorage[specificExercise]));
-                setIsLoading(false);
-                return;
-            }
-            else {
-                fetch(`https://random-exercise.onrender.com/api/exercise/${specificExercise}`)
+    const fetchExercise = useCallback(() => {
+            if (!muscle) {
+                if (localStorage[specificExercise] !== undefined) {
+                    setExercise(JSON.parse(localStorage[specificExercise]));
+                    setIsLoading(false);
+                    return;
+                }
+                else {
+                    fetch(`https://random-exercise.onrender.com/api/exercise/${specificExercise}`)
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Failed to fetch exercise');
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            setExercise(data);
+                            localStorage[specificExercise] = JSON.stringify(data);
+                            setIsLoading(false);
+                            return;
+                        })
+                        .catch(error => {
+                            setError(error.message);
+                            setIsLoading(false);
+                        });
+                }
+            } else {
+                fetch(`https://random-exercise.onrender.com/api/exercise/muscle/${muscle}`)
                     .then(response => {
                         if (!response.ok) {
                             throw new Error('Failed to fetch exercise');
@@ -52,38 +71,19 @@ const Exercise = () => {
                         return response.json();
                     })
                     .then(data => {
-                        setExercise(data);
-                        localStorage[specificExercise] = JSON.stringify(data);
+                        setExercise(data[0]);
                         setIsLoading(false);
-                        return;
                     })
                     .catch(error => {
                         setError(error.message);
                         setIsLoading(false);
                     });
             }
-        } else {
-            fetch(`https://random-exercise.onrender.com/api/exercise/muscle/${muscle}`)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Failed to fetch exercise');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    setExercise(data[0]);
-                    setIsLoading(false);
-                })
-                .catch(error => {
-                    setError(error.message);
-                    setIsLoading(false);
-                });
-        }
-    };
+        },[muscle, specificExercise]);
 
     useEffect(() => {
         fetchExercise();
-    });
+    }, [fetchExercise]);
 
     const showAnotherExerciseButton = muscle ? (
         <>
