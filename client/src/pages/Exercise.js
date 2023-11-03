@@ -83,7 +83,7 @@ const Exercise = () => {
 
     useEffect(() => {
         fetchExercise();
-    }, [muscle,exercise]);
+    }, [fetchExercise]);
 
     const showAnotherExerciseButton = muscle ? (
         <>
