@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { Home, Muscles, AllExercises, ErrorPage, RandomExercise } from './pages'
+import { Home, Muscles, AllExercises, ErrorPage, RandomExercise, Favorites } from './pages'
 import Layout from './components/Layout.js'
 
 function App() {
@@ -11,6 +11,8 @@ function App() {
           <Route path="/muscles" element={<Muscles />} />
           <Route path="/exercises" element={<AllExercises />} />
           <Route path="/random-exercise" element={<RandomExercise />} />
+          <Route mpath="/favorites" element={<Favorites />}
+          />
           <Route path="*" element={<ErrorPage />} />
         </Route>
       </Routes>

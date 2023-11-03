@@ -62,5 +62,18 @@ const logoutUser = async (req, res, next) => {
         next(err);
     }
 }
+// const getUserFavoritesExercises = async (req, res, next) => {
+//     try {
+//         const favoritesExercises = await UserExercises.find({}).sort({ muscle: 1, difficulty: 1 });
+//         if (exercises.length == 0)
+//             res.status(404).json({ "msg": "No exercises was found" });
+//         else
+//             res.status(200).json(exercises);
+//     }
+//     catch (error) {
+//         next(error)
+//     }
+// }
+
 
 export { loginUser, logoutUser, signupUser }

@@ -178,3 +178,16 @@ optgroup {
     color: black;
     background-color: white;
 }
+.loginBtn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-color: #019AF7;
+    color: white;
+    border: 1px solid #019AF7;
+    border-radius: 5px;
+    padding: 0px 15px;
+}

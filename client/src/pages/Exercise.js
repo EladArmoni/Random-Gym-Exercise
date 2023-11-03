@@ -1,6 +1,8 @@
-import {Loading } from '../components';
+import { Loading } from '../components';
 import { useLocation } from "react-router-dom";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
+import Button from '../components/Button';
+import Swal from 'sweetalert2';
 
 const Exercise = () => {
     const location = useLocation();
@@ -10,7 +12,31 @@ const Exercise = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    const fetchExercise =() => {
+    // const addToFav = () => {
+    //     const userEmail = JSON.parse(localStorage["user"]).email;
+    //     const exerciseName = exercise.name;
+
+    //     User.findOneAndUpdate(
+    //         { email: userEmail },
+    //         { $addToSet: { favoriteExercises: exerciseName } },
+    //         { new: true },
+    //         (err, updatedUser) => {
+    //             if (err) {
+    //                 console.error(err);
+    //             } else {
+    //                 Swal.fire({
+    //                     title: 'Exercise Added To Your Favorites',
+    //                     icon: 'success',
+    //                     background: '#181818',
+    //                     color: 'white'
+    //                 }).then(() => {
+    //                     localStorage["user"]=JSON.stringify(updatedUser);
+    //                 });
+    //             }
+    //         }
+    //     );
+    // }
+    const fetchExercise = () => {
         if (!muscle) {
             if (localStorage[specificExercise] !== undefined) {
                 setExercise(JSON.parse(localStorage[specificExercise]));
@@ -45,9 +71,8 @@ const Exercise = () => {
                     return response.json();
                 })
                 .then(data => {
-                    setExercise(data);
+                    setExercise(data[0]);
                     setIsLoading(false);
-                    return;
                 })
                 .catch(error => {
                     setError(error.message);
@@ -62,16 +87,12 @@ const Exercise = () => {
 
     const showAnotherExerciseButton = muscle ? (
         <>
-            <button onClick={fetchExercise}>Another Exercise</button>
-            <a href="/muscles" className="nav-link active">
-                <button>Return Back</button>
-            </a>
+            <Button text="Another Exercise" handleFunction={fetchExercise} />
+            <Button text="Return Back" handleFunction={() => window.location.href = '/muscles'} />
         </>
     ) : (
         <>
-            <a href="/exercises" className="nav-link active">
-                <button>Return Back</button>
-            </a>
+            <Button text="Return Back" handleFunction={() => window.location.href = '/muscles'} />
         </>
     );
 
@@ -91,7 +112,7 @@ const Exercise = () => {
         return (
             <div>
                 <p>Error: {error}</p>
-                <button className="btn btn-primary mb-5 mt-4" onClick={fetchExercise}>Try Again</button>
+                <Button text="Try Again" handleFunction={fetchExercise} />
             </div>
         );
     }
@@ -106,7 +127,7 @@ const Exercise = () => {
                 </div>
                 <div className="row justify-content-center background mt-4">
                     <div className="col-lg-6 text-center">
-                        <h4 className="card-title">Main Muscle: {exercise.muscle}</h4>
+                        <h4 className="card-title">Main Muscle: {exercise.muscle} </h4>
                         <p className="card-text mb-5">Difficulty: {exercise.difficulty}</p>
                         <div className="ratio ratio-16x9 mb-3">
                             <iframe
