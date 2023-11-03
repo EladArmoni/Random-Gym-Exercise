@@ -2,7 +2,7 @@ import { Loading } from '../components';
 import { useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Button from '../components/Button';
-import Swal from 'sweetalert2';
+// import Swal from 'sweetalert2';
 
 const Exercise = () => {
     const location = useLocation();
@@ -83,7 +83,7 @@ const Exercise = () => {
 
     useEffect(() => {
         fetchExercise();
-    }, []);
+    }, [muscle,exercise]);
 
     const showAnotherExerciseButton = muscle ? (
         <>
