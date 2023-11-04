@@ -49,20 +49,28 @@ const getExerciseByName = async (req, res, next) => {
 
 const addToFavorites = async (req, res, next) => {
     try {
-        // Update the user and get the updated user data
+        const { user_id, exerciseName } = req.body;
+
+        if (!user_id || !exerciseName) {
+            return res.status(400).json({ message: 'Bad Request: Missing user_id or exerciseName' });
+        }
+
         const updatedUser = await User.findOneAndUpdate(
-            { _id: req.body.user_id },
-            { $push: { favoriteExercises: req.body.exerciseName } },
-            { new: true } // This option returns the updated document
+            { _id: user_id },
+            { $push: { favoriteExercises: exerciseName } },
+            { new: true }
         );
 
         if (!updatedUser) {
-            res.status(404).json({ message: 'User not found'});
+            return res.status(404).json({ message: 'User not found' });
         }
-        res.status(200).json({ message: 'Added Successfully', user: updatedUser });
+
+        return res.status(200).json({ message: 'Added Successfully', user: updatedUser });
     } catch (error) {
+        console.error(error); // Log the error for debugging
         next(error);
     }
-}
+};
 
-export { getAllExercises, getRandomExercise, getExerciseByName,addToFavorites }
+
+export { getAllExercises, getRandomExercise, getExerciseByName, addToFavorites }
