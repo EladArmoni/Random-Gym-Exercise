@@ -203,11 +203,11 @@ const Navbar = () => {
                                 <div className="dropdown-center me-4">
                                     <button className="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         {JSON.parse(localStorage["user"]).firstName + " " + JSON.parse(localStorage["user"]).lastName}
-                                        <img id="userIconLogin" src={userIcon} alt='user-icon'/>
+                                        <img id="userIconLogin" src={userIcon} alt='user-icon' />
                                     </button>
                                     <ul className="dropdown-menu">
                                         <li><a className="dropdown-item" href="/favorites">Favorite Exercises</a></li>
-                                        <li><a className="dropdown-item" onClick={handleLoginClick}>Log Out</a></li>
+                                        <li><a className="dropdown-item" href="javascript:void(0)" onClick={handleLoginClick}>Log Out</a></li>
                                     </ul>
                                 </div>
                             }
