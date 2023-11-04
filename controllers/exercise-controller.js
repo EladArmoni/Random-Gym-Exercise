@@ -51,8 +51,8 @@ const addToFavorites = async (req, res, next) => {
     try {
         // Update the user and get the updated user data
         const updatedUser = await User.findOneAndUpdate(
-            { _id: JSON.parse(localStorage.getItem("user"))._id },
-            { $push: { favoriteExercises: req.params.exerciseName } },
+            { _id: req.body.user_id },
+            { $push: { favoriteExercises: req.body.exerciseName } },
             { new: true } // This option returns the updated document
         );
 

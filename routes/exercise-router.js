@@ -6,6 +6,6 @@ const router=express.Router()
 router.get("/",getAllExercises);
 router.get("/muscle/:muscle",getRandomExercise);
 router.get("/:exercise",getExerciseByName);
-router.post("/addToFavorites/:exerciseName",addToFavorites);
+router.post("/addToFavorites",addToFavorites);
 
 export default router;

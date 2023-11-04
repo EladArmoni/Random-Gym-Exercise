@@ -9,11 +9,16 @@ const ExerciseDetails = ({ exercise, showAnotherExerciseButton }) => {
                         {exercise.name}
                     </h1>
                     <button onClick={() => {
-                        fetch(`https://randomexercise.netlify.app/api/exercise/addToFavorites/${exercise.name}`, {
+                        const data = {
+                            exerciseName: exercise.name,
+                            user_id: JSON.parse(localStorage["user"]._id)
+                        };
+                        fetch(`https://randomexercise.netlify.app/api/exercise/addToFavorites`, {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json'
-                            }
+                            },
+                            body: JSON.stringify(data)
                         })
                             .then((response) => response.json())
                             .then((data) => {
