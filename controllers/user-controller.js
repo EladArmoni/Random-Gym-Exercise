@@ -14,7 +14,8 @@ const signupUser = async (req, res, next) => {
                 email: email,
                 password: password,
                 firstName: firstName,
-                lastName: lastName
+                lastName: lastName,
+                favoriteExercises:[]
             });
 
             newUser.save()
@@ -53,15 +54,6 @@ const loginUser = async (req, res, next) => {
     }
 }
 
-
-const logoutUser = async (req, res, next) => {
-    try {
-        localStorage.removeItem('user');
-        res.status(200).json({ message: 'Logged out successfully' });
-    } catch (err) {
-        next(err);
-    }
-}
 // const getUserFavoritesExercises = async (req, res, next) => {
 //     try {
 //         const favoritesExercises = await UserExercises.find({}).sort({ muscle: 1, difficulty: 1 });
@@ -76,4 +68,4 @@ const logoutUser = async (req, res, next) => {
 // }
 
 
-export { loginUser, logoutUser, signupUser }
+export { loginUser, signupUser }

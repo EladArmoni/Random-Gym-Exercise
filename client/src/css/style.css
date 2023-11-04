@@ -1,5 +1,5 @@
 body {
-    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     background-color: black;
 }
 
@@ -39,8 +39,20 @@ nav {
     color: #019AF7;
 }
 
-.navbar-nav {
-    padding-right: 70px;
+/* Media query for screens of computer size and above */
+@media (min-width: 992px) {
+    #navbarNavAltMarkup {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+
+@media (max-width: 992px) {
+    .loginBtns{
+        text-align: left;
+        margin-top:12px;
+    }
 }
 
 .nav-link {
@@ -77,27 +89,6 @@ nav {
     border: 3px solid white;
     cursor: pointer;
     opacity: 0.85;
-}
-
-.buttons {
-    display: flex;
-    justify-content: center;
-}
-
-.buttons button {
-    margin: 20px;
-    padding: 8px;
-    border-radius: 10px;
-    background-color: #019AF7;
-    color: white;
-    border: 1px solid #019AF7;
-    text-decoration: none;
-}
-
-.buttons button:hover {
-    color: #019AF7;
-    background-color: white;
-    border: 1px solid white;
 }
 
 #main {
@@ -157,7 +148,9 @@ nav {
         font-size: 50px !important;
     }
 }
-
+.navbar-brand{
+    margin-left: 20px;
+}
 #login {
     width: 35%;
     margin: auto;
@@ -178,7 +171,8 @@ optgroup {
     color: black;
     background-color: white;
 }
-.loginBtn{
+
+.loginBtn {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -190,4 +184,30 @@ optgroup {
     border: 1px solid #019AF7;
     border-radius: 5px;
     padding: 0px 15px;
+}
+
+/* Scrollbar Track */
+::-webkit-scrollbar {
+    width: 8px;
+    background: #000000;
+    /* Background color of the scrollbar track */
+}
+
+/* Scrollbar Handle */
+::-webkit-scrollbar-thumb {
+    background: #363636;
+    /* Color of the scrollbar handle */
+    border-radius: 6px;
+    /* Rounded corners for the handle */
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #414040;
+    /* Color of the scrollbar handle on hover */
+}
+
+div:where(.swal2-container) button:where(.swal2-styled).swal2-confirm {
+
+    background-color: #0d6efd !important;
 }

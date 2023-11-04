@@ -11,8 +11,7 @@ function App() {
           <Route path="/muscles" element={<Muscles />} />
           <Route path="/exercises" element={<AllExercises />} />
           <Route path="/random-exercise" element={<RandomExercise />} />
-          <Route mpath="/favorites" element={<Favorites />}
-          />
+          <Route path="/favorites" element={<Favorites />}/>
           <Route path="*" element={<ErrorPage />} />
         </Route>
       </Routes>

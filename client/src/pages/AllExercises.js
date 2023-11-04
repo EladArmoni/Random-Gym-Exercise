@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { Header,GroupMuscle,Button } from '../components';
 
 const muscles = ["Legs", "Back", "Chest", "Shoulders", "Biceps", "Triceps"];
 
@@ -31,28 +32,20 @@ const AllExercises = () => {
         <>
             <div className="container-fluid text-light p-5 background d-flex" id="allExe">
                 <div className="text-center m-auto">
-                    <h1 className="f-size pb-5">All Exercises</h1>
+                <Header text="All Exercises"/>
                     <select className="form-select" aria-label="Default select example" name="exercise" onChange={(e) => setSelectedExercise(e.target.value)}>
                         <option value="">Choose Exercise</option>
                         {muscles.map((muscle) => {
                             const filteredExercises = exercises.filter((exercise) => exercise.muscle === muscle);
                             if (filteredExercises.length > 0) {
-                                return (
-                                    <optgroup label={muscle} key={muscle}>
-                                        {filteredExercises.map((exercise) => (
-                                            <option className='option' value={exercise.name} key={exercise._id}>
-                                                {exercise.name}
-                                            </option>
-                                        ))}
-                                    </optgroup>
-                                );
+                                return (<GroupMuscle muscle={muscle} filteredExercises={filteredExercises}/>);
                             } else {
                                 return null;
                             }
                         })}
                     </select>
                     <Link to="/random-exercise" state={{ muscle: null, exercise: selectedExercise }}>
-                        <button className='btn btn-primary mt-5' disabled={!selectedExercise}>Exercise Video</button>
+                        <Button classCss="btn btn-primary p-2 m-4" text="Exercise Video" disabled={!selectedExercise} />
                     </Link>
                 </div>
             </div>

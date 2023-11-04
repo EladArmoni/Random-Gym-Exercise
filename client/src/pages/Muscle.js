@@ -5,6 +5,7 @@ import Shoulders from '../images/Shoulders.jpg';
 import Biceps from '../images/Biceps.jpg';
 import Triceps from '../images/Triceps.jpg';
 import MuscleBtn from "../components/MuscleBtn.js";
+import {Header} from "../components"
 
 const muscles = [
     { name: "Legs", image: Legs },
@@ -19,7 +20,7 @@ const Muscles = () => {
     return (
         <>
             <div className="container-fluid text-center muscles-div" style={{ backgroundColor: "#061118" }}>
-                <h1 className="h1 text-light pt-4 pb-4 f-size" style={{ fontSize: "40px" }}>Choose The Muscle You Want To Work On</h1>
+                <Header text="Choose The Muscle You Want To Work On"/>
                 <div className=" row justify-content-center align-items-center  mx-w-75 m-auto">
                     {muscles.map((muscle) =><MuscleBtn key={muscle} muscle={muscle}/>)}
                 </div>

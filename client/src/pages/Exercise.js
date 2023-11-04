@@ -1,4 +1,4 @@
-import { Loading } from '../components';
+import { Loading,ExerciseDetails } from '../components';
 import { useLocation } from "react-router-dom";
 import { useState, useEffect, useCallback } from "react";
 import Button from '../components/Button';
@@ -37,33 +37,14 @@ const Exercise = () => {
     //     );
     // }
     const fetchExercise = useCallback(() => {
-            if (!muscle) {
-                if (localStorage[specificExercise] !== undefined) {
-                    setExercise(JSON.parse(localStorage[specificExercise]));
-                    setIsLoading(false);
-                    return;
-                }
-                else {
-                    fetch(`https://random-exercise.onrender.com/api/exercise/${specificExercise}`)
-                        .then(response => {
-                            if (!response.ok) {
-                                throw new Error('Failed to fetch exercise');
-                            }
-                            return response.json();
-                        })
-                        .then(data => {
-                            setExercise(data);
-                            localStorage[specificExercise] = JSON.stringify(data);
-                            setIsLoading(false);
-                            return;
-                        })
-                        .catch(error => {
-                            setError(error.message);
-                            setIsLoading(false);
-                        });
-                }
-            } else {
-                fetch(`https://random-exercise.onrender.com/api/exercise/muscle/${muscle}`)
+        if (!muscle) {
+            if (localStorage[specificExercise] !== undefined) {
+                setExercise(JSON.parse(localStorage[specificExercise]));
+                setIsLoading(false);
+                return;
+            }
+            else {
+                fetch(`https://random-exercise.onrender.com/api/exercise/${specificExercise}`)
                     .then(response => {
                         if (!response.ok) {
                             throw new Error('Failed to fetch exercise');
@@ -71,15 +52,34 @@ const Exercise = () => {
                         return response.json();
                     })
                     .then(data => {
-                        setExercise(data[0]);
+                        setExercise(data);
+                        localStorage[specificExercise] = JSON.stringify(data);
                         setIsLoading(false);
+                        return;
                     })
                     .catch(error => {
                         setError(error.message);
                         setIsLoading(false);
                     });
             }
-        },[muscle, specificExercise]);
+        } else {
+            fetch(`https://random-exercise.onrender.com/api/exercise/muscle/${muscle}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to fetch exercise');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    setExercise(data[0]);
+                    setIsLoading(false);
+                })
+                .catch(error => {
+                    setError(error.message);
+                    setIsLoading(false);
+                });
+        }
+    }, [muscle, specificExercise]);
 
     useEffect(() => {
         fetchExercise();
@@ -87,12 +87,12 @@ const Exercise = () => {
 
     const showAnotherExerciseButton = muscle ? (
         <>
-            <Button text="Another Exercise" handleFunction={fetchExercise} />
-            <Button text="Return Back" handleFunction={() => window.location.href = '/muscles'} />
+            <Button classCss="btn btn-primary p-2 m-2" text="Another Exercise" handleFunction={fetchExercise} />
+            <Button classCss="btn btn-primary p-2 m-2" text="Return Back" handleFunction={() => window.location.href = '/muscles'} />
         </>
     ) : (
         <>
-            <Button text="Return Back" handleFunction={() => window.location.href = '/muscles'} />
+            <Button classCss="btn btn-primary p-2 m-2" text="Return Back" handleFunction={() => window.location.href = '/exercises'} />
         </>
     );
 
@@ -112,38 +112,13 @@ const Exercise = () => {
         return (
             <div>
                 <p>Error: {error}</p>
-                <Button text="Try Again" handleFunction={fetchExercise} />
+                <Button classCss="btn btn-primary p-2 m-1" text="Try Again" handleFunction={fetchExercise} />
             </div>
         );
     }
 
     return (
-        <>
-            <div className="container-fluid" style={{ backgroundColor: "#061118", color: "white" }}>
-                <div className="row justify-content-center text-center">
-                    <h1 className="mb-2 mt-4" style={{ color: "#019AF7" }}>
-                        {exercise.name}
-                    </h1>
-                </div>
-                <div className="row justify-content-center background mt-4">
-                    <div className="col-lg-6 text-center">
-                        <h4 className="card-title">Main Muscle: {exercise.muscle} </h4>
-                        <p className="card-text mb-5">Difficulty: {exercise.difficulty}</p>
-                        <div className="ratio ratio-16x9 mb-3">
-                            <iframe
-                                key={exercise.name}
-                                allowFullScreen
-                                src={`${exercise.description}&autoplay=1&mute=1`}
-                                title="YouTube video player"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            ></iframe>
-                        </div>
-                        <div className='buttons'>
-                            {showAnotherExerciseButton}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </>)
+        <ExerciseDetails exercise={exercise} showAnotherExerciseButton={showAnotherExerciseButton} />
+    )
 };
 export default Exercise; 

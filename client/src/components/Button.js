@@ -1,7 +1,7 @@
 
-const Button = ({text,handleFunction}) => {
+const Button = ({ text, handleFunction,classCss,disabled}) => {
     return (
-        <button className="btn btn-primary p-2" onClick={handleFunction}>{text}</button>
+        <button className={classCss} onClick={handleFunction} disabled={disabled}>{text}</button>
     );
 }
 export default Button
