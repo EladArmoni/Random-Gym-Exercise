@@ -211,3 +211,9 @@ div:where(.swal2-container) button:where(.swal2-styled).swal2-confirm {
 
     background-color: #0d6efd !important;
 }
+
+#userIconLogin
+{
+    width:30px;
+    margin: 5px;
+}

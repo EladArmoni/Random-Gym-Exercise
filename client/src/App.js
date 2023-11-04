@@ -1,8 +1,10 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route,Navigate  } from 'react-router-dom'
 import { Home, Muscles, AllExercises, ErrorPage, RandomExercise, Favorites } from './pages'
 import Layout from './components/Layout.js'
 
 function App() {
+  const isLoggedIn = localStorage.getItem('user');
+
   return (
     <BrowserRouter>
       <Routes>
@@ -11,7 +13,7 @@ function App() {
           <Route path="/muscles" element={<Muscles />} />
           <Route path="/exercises" element={<AllExercises />} />
           <Route path="/random-exercise" element={<RandomExercise />} />
-          <Route path="/favorites" element={<Favorites />}/>
+          {isLoggedIn && (<Route path="/favorites" element={<Favorites/>} />)}
           <Route path="*" element={<ErrorPage />} />
         </Route>
       </Routes>
