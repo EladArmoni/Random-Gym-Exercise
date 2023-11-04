@@ -11,7 +11,7 @@ const ExerciseDetails = ({ exercise, showAnotherExerciseButton }) => {
                     <button onClick={() => {
                         const data = {
                             exerciseName: exercise.name,
-                            user_id: JSON.parse(localStorage["user"]._id)
+                            user_id: JSON.parse(localStorage["user"])._id
                         };
                         fetch(`https://randomexercise.netlify.app/api/user/addToFavorites`, {
                             method: 'POST',
