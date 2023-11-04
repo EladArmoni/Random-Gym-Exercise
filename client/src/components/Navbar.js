@@ -207,7 +207,7 @@ const Navbar = () => {
                                     </button>
                                     <ul className="dropdown-menu">
                                         <li><a className="dropdown-item" href="/favorites">Favorite Exercises</a></li>
-                                        <li><a className="dropdown-item" href="javascript:void(0)" onClick={handleLoginClick}>Log Out</a></li>
+                                        <li><button className="dropdown-item" onClick={handleLoginClick}>Log Out</button></li>
                                     </ul>
                                 </div>
                             }
