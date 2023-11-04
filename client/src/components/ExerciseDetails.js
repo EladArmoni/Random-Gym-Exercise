@@ -13,7 +13,7 @@ const ExerciseDetails = ({ exercise, showAnotherExerciseButton }) => {
                             exerciseName: exercise.name,
                             user_id: JSON.parse(localStorage["user"]._id)
                         };
-                        fetch(`https://randomexercise.netlify.app/api/exercise/addToFavorites`, {
+                        fetch(`https://randomexercise.netlify.app/api/user/addToFavorites`, {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json'
