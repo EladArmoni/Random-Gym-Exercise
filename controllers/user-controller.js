@@ -54,6 +54,23 @@ const loginUser = async (req, res, next) => {
     }
 }
 
+const addExerciseToFavorites = async (req, res, next) => {
+    try {
+        // Update the user and get the updated user data
+        const updatedUser = await User.findOneAndUpdate(
+            { _id: req.body.user_id },
+            { $push: { favoriteExercises: req.body.exerciseName } },
+            { new: true } // This option returns the updated document
+        );
+
+        if (!updatedUser) {
+            res.status(404).json({ message: 'User not found'});
+        }
+        res.status(200).json({ message: 'Added Successfully', user: updatedUser });
+    } catch (error) {
+        next(error);
+    }
+}
 // const getUserFavoritesExercises = async (req, res, next) => {
 //     try {
 //         const favoritesExercises = await UserExercises.find({}).sort({ muscle: 1, difficulty: 1 });
@@ -68,4 +85,4 @@ const loginUser = async (req, res, next) => {
 // }
 
 
-export { loginUser, signupUser }
+export { loginUser, signupUser,addExerciseToFavorites }
