@@ -1,6 +1,6 @@
 import React from 'react'
-
-const ExerciseDetails = ({exercise,showAnotherExerciseButton}) => {
+import Swal from 'sweetalert2'
+const ExerciseDetails = ({ exercise, showAnotherExerciseButton }) => {
     return (
         <>
             <div className="container-fluid" style={{ backgroundColor: "#061118", color: "white" }}>
@@ -8,6 +8,28 @@ const ExerciseDetails = ({exercise,showAnotherExerciseButton}) => {
                     <h1 className="mb-2 mt-4" style={{ color: "#019AF7" }}>
                         {exercise.name}
                     </h1>
+                    <button onClick={() => {
+                        fetch(`https://randomexercise.netlify.app/exercise/addToFavorites/${exercise.name}`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            }
+                        })
+                            .then((response) => response.json())
+                            .then((data) => {
+                                const updatedUserJSON = JSON.stringify(data.user);
+                                localStorage.setItem('user', updatedUserJSON);
+                                Swal.fire({
+                                    title: updatedUserJSON.message,
+                                    background: '#181818',
+                                    color: 'white'
+                                })
+                            })
+                    }} className="favBtn"
+                        style={{ color: JSON.parse(localStorage["user"]).favoriteExercises.includes(exercise.name) ? 'red' : 'white' }}
+                    >
+                        &#10084;
+                    </button>
                 </div>
                 <div className="row justify-content-center background mt-4">
                     <div className="col-lg-6 text-center">

@@ -1,4 +1,5 @@
 import Exercise from "../models/Exercise.js";
+import Swal from "sweetalert2";
 
 const getAllExercises = async (req, res, next) => {
     try {
@@ -46,4 +47,22 @@ const getExerciseByName = async (req, res, next) => {
     }
 }
 
-export { getAllExercises, getRandomExercise, getExerciseByName }
+const addToFavorites = async (req, res, next) => {
+    try {
+        // Update the user and get the updated user data
+        const updatedUser = await User.findOneAndUpdate(
+            { _id: JSON.parse(localStorage.getItem("user"))._id },
+            { $push: { favoriteExercises: req.params.exerciseName } },
+            { new: true } // This option returns the updated document
+        );
+
+        if (!updatedUser) {
+            res.status(404).json({ message: 'User not found'});
+        }
+        res.status(200).json({ message: 'Added Successfully', user: updatedUser });
+    } catch (error) {
+        next(error);
+    }
+}
+
+export { getAllExercises, getRandomExercise, getExerciseByName,addToFavorites }

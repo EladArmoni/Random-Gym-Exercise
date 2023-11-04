@@ -49,9 +49,9 @@ nav {
 }
 
 @media (max-width: 992px) {
-    .loginBtns{
+    .loginBtns {
         text-align: left;
-        margin-top:12px;
+        margin-top: 12px;
     }
 }
 
@@ -148,9 +148,11 @@ nav {
         font-size: 50px !important;
     }
 }
-.navbar-brand{
+
+.navbar-brand {
     margin-left: 20px;
 }
+
 #login {
     width: 35%;
     margin: auto;
@@ -212,8 +214,21 @@ div:where(.swal2-container) button:where(.swal2-styled).swal2-confirm {
     background-color: #0d6efd !important;
 }
 
-#userIconLogin
-{
-    width:30px;
+#userIconLogin {
+    width: 30px;
     margin: 5px;
+}
+
+.favBtn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: color 0.3s;
+    font-size: 30px; /* Adjust the size as needed */
+    padding: 0;
+    width: auto;
+  }
+
+.favBtn:hover {
+    color: red !important;
 }
