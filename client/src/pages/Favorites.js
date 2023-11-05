@@ -3,9 +3,10 @@ import { FavoriteExercise } from "../components";
 
 const Favorites = () => {
     const [favorites, setFavorites] = useState(JSON.parse(localStorage["user"]).favoriteExercises);
-    let local = 'http://localhost:5000';
-    // let server='https://random-exercise.onrender.com';
-    let api = local;
+    
+    // let local = 'http://localhost:5000';
+    let server='https://random-exercise.onrender.com';
+    let api = server;
 
     const removeFromFav = (exercise) => {
         const token = JSON.parse(localStorage.getItem('token'));

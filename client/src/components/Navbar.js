@@ -8,9 +8,9 @@ const Navbar = () => {
     const [loginButton, setLoginButton] = useState("Login");
     const [signUpButton, setSignUpButton] = useState(true);
 
-    let local='http://localhost:5000';
-    // let server='https://random-exercise.onrender.com';
-    let api=local;
+    // let local='http://localhost:5000';
+    let server='https://random-exercise.onrender.com';
+    let api=server;
     
     useEffect(() => {
         const user = localStorage.getItem("user");

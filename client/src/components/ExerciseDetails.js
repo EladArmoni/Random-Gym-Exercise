@@ -4,9 +4,9 @@ import Swal from 'sweetalert2';
 const ExerciseDetails = ({ exercise, showAnotherExerciseButton }) => {
     const [inFavorites, setInFavorites] = useState(false);
 
-    let local = 'http://localhost:5000';
-    // let server='https://random-exercise.onrender.com';
-    let api = local;
+    // let local = 'http://localhost:5000';
+    let server='https://random-exercise.onrender.com';
+    let api = server;
 
     useEffect(() => {
         if (localStorage["user"] !== undefined) {
