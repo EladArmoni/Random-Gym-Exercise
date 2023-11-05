@@ -109,6 +109,7 @@ const Navbar = () => {
                 setSignUpButton(true);
                 localStorage.removeItem('user');
                 localStorage.removeItem('token');
+                window.location.href = '/';
             });
         } else {
             // User is not logged in, so open the login popup

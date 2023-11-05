@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
@@ -11,12 +12,7 @@ const UserSchema = new Schema({
     password: { type: String, required: true },
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
-    favoriteExercises: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'Exercise' // Reference the "Exercise" model
-        }
-    ]
+    favoriteExercises: [String]
 });
 
 const model = mongoose.model('User', UserSchema);

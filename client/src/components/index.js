@@ -6,5 +6,6 @@ import ExerciseDetails from './ExerciseDetails.js'
 import Header from './Header.js'
 import GroupMuscle from './GroupMuscle.js'
 import Button from './Button.js'
+import FavoriteExercise from "./FavoriteExercise.js"
 
-export { Navbar, Logo, Footer, Loading, ExerciseDetails, Header, GroupMuscle, Button }
+export { Navbar, Logo, Footer, Loading, ExerciseDetails, Header, GroupMuscle, Button,FavoriteExercise }

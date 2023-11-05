@@ -110,7 +110,7 @@ const addExerciseToFavorites = async (req, res, next) => {
         // Update the user and get the updated user data
         const updatedUser = await User.findOneAndUpdate(
             { _id: req.body.user_id },
-            { $push: { favoriteExercises: exercise._id } }, // Store the exercise ID
+            { $push: { favoriteExercises: exercise.name } }, // Store the exercise ID
             { new: true }
         );
 
@@ -137,7 +137,7 @@ const removeExerciseFromFavorites = async (req, res, next) => {
         // Update the user and get the updated user data
         const updatedUser = await User.findOneAndUpdate(
             { _id: req.body.user_id },
-            { $pull: { favoriteExercises: exercise._id } },
+            { $pull: { favoriteExercises: exercise.name } },
             { new: true } // This option returns the updated document
         );
         if (!updatedUser) {

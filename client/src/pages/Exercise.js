@@ -42,7 +42,7 @@ const Exercise = () => {
                     });
             }
         } else {
-            fetch(`https://random-exercise.onrender.com/api/exercise/muscle/${muscle}`)
+            fetch(api+`/api/exercise/muscle/${muscle}`)
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Failed to fetch exercise');
