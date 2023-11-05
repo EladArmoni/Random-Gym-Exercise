@@ -8,6 +8,10 @@ const AllExercises = () => {
     const [exercises, setExercises] = useState([]);
     const [selectedExercise, setSelectedExercise] = useState(null);
 
+    let local='http://localhost:5000';
+    // let server='https://random-exercise.onrender.com';
+    let api=local;
+
     useEffect(() => {
         async function fetchExercises() {
             try {
@@ -15,7 +19,7 @@ const AllExercises = () => {
                     setExercises(JSON.parse(localStorage["exercises"]));
                 }
                 else {
-                    const response = await fetch('https://random-exercise.onrender.com/api/exercise/');
+                    const response = await fetch(api+'/api/exercise/');
                     const data = await response.json();
                     setExercises(data);
                     localStorage["exercises"] = JSON.stringify(data);
@@ -26,7 +30,7 @@ const AllExercises = () => {
         }
 
         fetchExercises();
-    }, []);
+    }, [api]);
 
     return (
         <>

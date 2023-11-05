@@ -228,7 +228,3 @@ div:where(.swal2-container) button:where(.swal2-styled).swal2-confirm {
     padding: 0;
     width: auto;
   }
-
-.favBtn:hover {
-    color: red !important;
-}

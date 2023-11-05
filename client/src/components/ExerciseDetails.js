@@ -1,38 +1,66 @@
 import React, { useEffect, useState } from 'react';
+import Swal from 'sweetalert2';
+
 const ExerciseDetails = ({ exercise, showAnotherExerciseButton }) => {
     const [inFavorites, setInFavorites] = useState(false);
+
+    let local = 'http://localhost:5000';
+    // let server='https://random-exercise.onrender.com';
+    let api = local;
+
     useEffect(() => {
         if (localStorage["user"] !== undefined) {
-            if (JSON.parse(localStorage["user"]).favoriteExercises.includes(exercise.name)) {
+            if (JSON.parse(localStorage["user"]).favoriteExercises.includes(exercise._id)) {
                 setInFavorites(true);
             }
         }
     }, [exercise]);
 
     const toggleFavorite = () => {
+        const token = JSON.parse(localStorage.getItem('token'));
+
+        if (!token) {
+            Swal.fire({
+                title: 'You must be logged in to favorite exercises!',
+                icon: 'warning',
+                background: '#181818',
+                color: 'white'
+            })
+            return;
+        }
+
         let url;
         const data = {
             exerciseName: exercise.name,
             user_id: JSON.parse(localStorage["user"])._id
         };
         if (inFavorites) {
-            url = `http://localhost:5000/api/user/removeExerciseFromFavorite`;
+            url = api + `/api/user/removeExerciseFromFavorite`;
         } else {
-            url = `http://localhost:5000/api/user/addExerciseToFavorite`;
+            url = api + `/api/user/addExerciseToFavorite`;
         }
         fetch(url, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify(data)
         })
-        .then((response) => response.json())
-        .then((data) => {
-            const updatedUserJSON = JSON.stringify(data.user);
-            localStorage.setItem('user', updatedUserJSON);
-            setInFavorites(!inFavorites);
-        });
+            .then((response) => response.json())
+            .then((data) => {
+                try {
+                    const updatedUserJSON = JSON.stringify(data.user);
+                    localStorage.setItem('user', updatedUserJSON);
+                    setInFavorites(!inFavorites);
+                }
+                catch (err) {
+                    Swal.fire({
+                        icon: "error",
+                        title: err,
+                    });
+                }
+            });
     };
 
     return (

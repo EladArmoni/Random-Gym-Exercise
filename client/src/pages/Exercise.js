@@ -11,6 +11,10 @@ const Exercise = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
 
+    let local='http://localhost:5000';
+    // let server='https://random-exercise.onrender.com';
+    let api=local;
+
     const fetchExercise = useCallback(() => {
         if (!muscle) {
             if (localStorage[specificExercise] !== undefined) {
@@ -19,7 +23,7 @@ const Exercise = () => {
                 return;
             }
             else {
-                fetch(`https://random-exercise.onrender.com/api/exercise/${specificExercise}`)
+                fetch(api+`/api/exercise/${specificExercise}`)
                     .then(response => {
                         if (!response.ok) {
                             throw new Error('Failed to fetch exercise');
@@ -54,7 +58,7 @@ const Exercise = () => {
                     setIsLoading(false);
                 });
         }
-    }, [muscle, specificExercise]);
+    }, [muscle, specificExercise,api]);
 
     useEffect(() => {
         fetchExercise();

@@ -8,6 +8,10 @@ const Navbar = () => {
     const [loginButton, setLoginButton] = useState("Login");
     const [signUpButton, setSignUpButton] = useState(true);
 
+    let local='http://localhost:5000';
+    // let server='https://random-exercise.onrender.com';
+    let api=local;
+    
     useEffect(() => {
         const user = localStorage.getItem("user");
         if (user) {
@@ -44,7 +48,7 @@ const Navbar = () => {
 
                 else {
 
-                    const url = 'https://random-exercise.onrender.com/api/user/signup';
+                    const url = api+'/api/user/signup';
                     const data = {
                         email: email,
                         password: password,
@@ -68,6 +72,9 @@ const Navbar = () => {
                             // Handle the response data here
                             if (data.message.includes("successfully")) {
                                 localStorage["user"] = JSON.stringify(data.user);
+                                if(data.token){
+                                    localStorage["token"] = JSON.stringify(data.token);
+                                }
                                 setLoginButton("Logout");
                                 setSignUpButton(false);
                             }
@@ -101,6 +108,7 @@ const Navbar = () => {
                 setLoginButton("Login");
                 setSignUpButton(true);
                 localStorage.removeItem('user');
+                localStorage.removeItem('token');
             });
         } else {
             // User is not logged in, so open the login popup
@@ -126,7 +134,7 @@ const Navbar = () => {
                     }
 
                     else {
-                        const url = 'https://random-exercise.onrender.com/api/user/login';
+                        const url = api+'/api/user/login';
                         const data = {
                             email: email,
                             password: password
@@ -148,6 +156,9 @@ const Navbar = () => {
                                 // Handle the response data here
                                 if (data.message.includes("successfully")) {
                                     localStorage["user"] = JSON.stringify(data.user);
+                                    if(data.token){
+                                        localStorage["token"] = JSON.stringify(data.token);
+                                    }
                                     setLoginButton("Logout");
                                     setSignUpButton(false);
                                 }
