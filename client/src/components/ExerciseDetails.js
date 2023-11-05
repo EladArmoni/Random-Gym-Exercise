@@ -1,6 +1,40 @@
-import React from 'react'
-import Swal from 'sweetalert2'
+import React, { useEffect, useState } from 'react';
 const ExerciseDetails = ({ exercise, showAnotherExerciseButton }) => {
+    const [inFavorites, setInFavorites] = useState(false);
+    useEffect(() => {
+        if (localStorage["user"] !== undefined) {
+            if (JSON.parse(localStorage["user"]).favoriteExercises.includes(exercise.name)) {
+                setInFavorites(true);
+            }
+        }
+    }, [exercise]);
+
+    const toggleFavorite = () => {
+        let url;
+        const data = {
+            exerciseName: exercise.name,
+            user_id: JSON.parse(localStorage["user"])._id
+        };
+        if (inFavorites) {
+            url = `http://localhost:5000/api/user/removeExerciseFromFavorite`;
+        } else {
+            url = `http://localhost:5000/api/user/addExerciseToFavorite`;
+        }
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            const updatedUserJSON = JSON.stringify(data.user);
+            localStorage.setItem('user', updatedUserJSON);
+            setInFavorites(!inFavorites);
+        });
+    };
+
     return (
         <>
             <div className="container-fluid" style={{ backgroundColor: "#061118", color: "white" }}>
@@ -8,30 +42,8 @@ const ExerciseDetails = ({ exercise, showAnotherExerciseButton }) => {
                     <h1 className="mb-2 mt-4" style={{ color: "#019AF7" }}>
                         {exercise.name}
                     </h1>
-                    <button onClick={() => {
-                        const data = {
-                            exerciseName: exercise.name,
-                            user_id: JSON.parse(localStorage["user"])._id
-                        };
-                        fetch(`https://randomexercise.netlify.app/api/user/addToFavorites`, {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify(data)
-                        })
-                            .then((response) => response.json())
-                            .then((data) => {
-                                const updatedUserJSON = JSON.stringify(data.user);
-                                localStorage.setItem('user', updatedUserJSON);
-                                Swal.fire({
-                                    title: updatedUserJSON.message,
-                                    background: '#181818',
-                                    color: 'white'
-                                })
-                            })
-                    }} className="favBtn"
-                        style={{ color: JSON.parse(localStorage["user"]).favoriteExercises.includes(exercise.name) ? 'red' : 'white' }}
+                    <button onClick={toggleFavorite} className="favBtn"
+                        style={{ color: inFavorites ? 'red' : 'white' }}
                     >
                         &#10084;
                     </button>

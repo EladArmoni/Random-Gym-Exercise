@@ -6,7 +6,12 @@ const UserSchema = new Schema({
     password: String,
     firstName: String,
     lastName: String,
-    favoriteExercises: [String]
+    favoriteExercises: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Exercise' // Reference the "Exercise" model
+        }
+    ]
 });
 
 const model = mongoose.model('User', UserSchema);

@@ -1,4 +1,5 @@
 import User from "../models/User.js";
+import Exercise from "../models/Exercise.js";
 
 const signupUser = async (req, res, next) => {
     const { email, password, firstName, lastName } = req.body;
@@ -15,7 +16,7 @@ const signupUser = async (req, res, next) => {
                 password: password,
                 firstName: firstName,
                 lastName: lastName,
-                favoriteExercises:[]
+                favoriteExercises: []
             });
 
             newUser.save()
@@ -56,33 +57,56 @@ const loginUser = async (req, res, next) => {
 
 const addExerciseToFavorites = async (req, res, next) => {
     try {
+        const exercise = await Exercise.findOne({ name: req.body.exerciseName });
+
+        if (!exercise) {
+            res.status(404).json({ message: 'Exercise not found' });
+            return;
+        }
+
         // Update the user and get the updated user data
         const updatedUser = await User.findOneAndUpdate(
             { _id: req.body.user_id },
-            { $push: { favoriteExercises: req.body.exerciseName } },
-            { new: true } // This option returns the updated document
+            { $push: { favoriteExercises: exercise._id } }, // Store the exercise ID
+            { new: true }
         );
-
+        
         if (!updatedUser) {
-            res.status(404).json({ message: 'User not found'});
+            res.status(404).json({ message: 'User not found' });
         }
-        res.status(200).json({ message: 'Added Successfully', user: updatedUser });
+        else {
+            res.status(200).json({ message: 'Added Successfully', user: updatedUser });
+        }
     } catch (error) {
         next(error);
     }
 }
-// const getUserFavoritesExercises = async (req, res, next) => {
-//     try {
-//         const favoritesExercises = await UserExercises.find({}).sort({ muscle: 1, difficulty: 1 });
-//         if (exercises.length == 0)
-//             res.status(404).json({ "msg": "No exercises was found" });
-//         else
-//             res.status(200).json(exercises);
-//     }
-//     catch (error) {
-//         next(error)
-//     }
-// }
+
+const removeExerciseFromFavorites = async (req, res, next) => {
+    try {
+
+        const exercise = await Exercise.findOne({ name: req.body.exerciseName });
+        if (!exercise) {
+            res.status(404).json({ message: 'Exercise not found' });
+            return;
+        }
+
+        // Update the user and get the updated user data
+        const updatedUser = await User.findOneAndUpdate(
+            { _id: req.body.user_id },
+            { $pull: { favoriteExercises:exercise._id } },
+            { new: true } // This option returns the updated document
+        );
+        if (!updatedUser) {
+            res.status(404).json({ message: 'User not found' });
+        }
+        else {
+            res.status(200).json({ message: 'Removed Successfully', user: updatedUser });
+        }
+    } catch (error) {
+        next(error);
+    }
+}
 
 
-export { loginUser, signupUser,addExerciseToFavorites }
+export { loginUser, signupUser, addExerciseToFavorites, removeExerciseFromFavorites }

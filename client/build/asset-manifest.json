@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/static/css/main.8d65729f.css",
+    "main.js": "/static/js/main.1da9f05c.js",
+    "static/media/home_main_pic2.jpg": "/static/media/home_main_pic2.63cb3d11c8b85269df5b.jpg",
+    "static/media/allExercisesPic.jpg": "/static/media/allExercisesPic.5646071ad7c46c0a05e6.jpg",
+    "static/media/logo.png": "/static/media/logo.7fe240b0733c1fc88fb5.png",
+    "static/media/errorPage.jpg": "/static/media/errorPage.f624f959089af1102a6d.jpg",
+    "static/media/user.png": "/static/media/user.0d14c6999b4a5c8e86a7.png",
+    "static/media/Back.jpg": "/static/media/Back.bff2a9622787494a7236.jpg",
+    "static/media/Legs.jpg": "/static/media/Legs.0382a6f97bd4ae4bafea.jpg",
+    "static/media/Biceps.jpg": "/static/media/Biceps.2d6ddfba9fa8ee74b3d2.jpg",
+    "static/media/Triceps.jpg": "/static/media/Triceps.4ccd0fa974d32dd60e12.jpg",
+    "static/media/Chest.jpg": "/static/media/Chest.fa05e0dc37e42aa4bf31.jpg",
+    "static/media/Shoulders.jpg": "/static/media/Shoulders.94e80fa805097e20eb38.jpg",
+    "index.html": "/index.html",
+    "main.8d65729f.css.map": "/static/css/main.8d65729f.css.map",
+    "main.1da9f05c.js.map": "/static/js/main.1da9f05c.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.8d65729f.css",
+    "static/js/main.1da9f05c.js"
+  ]
+}

@@ -2,7 +2,6 @@ import { Loading,ExerciseDetails } from '../components';
 import { useLocation } from "react-router-dom";
 import { useState, useEffect, useCallback } from "react";
 import Button from '../components/Button';
-// import Swal from 'sweetalert2';
 
 const Exercise = () => {
     const location = useLocation();
@@ -12,30 +11,6 @@ const Exercise = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    // const addToFav = () => {
-    //     const userEmail = JSON.parse(localStorage["user"]).email;
-    //     const exerciseName = exercise.name;
-
-    //     User.findOneAndUpdate(
-    //         { email: userEmail },
-    //         { $addToSet: { favoriteExercises: exerciseName } },
-    //         { new: true },
-    //         (err, updatedUser) => {
-    //             if (err) {
-    //                 console.error(err);
-    //             } else {
-    //                 Swal.fire({
-    //                     title: 'Exercise Added To Your Favorites',
-    //                     icon: 'success',
-    //                     background: '#181818',
-    //                     color: 'white'
-    //                 }).then(() => {
-    //                     localStorage["user"]=JSON.stringify(updatedUser);
-    //                 });
-    //             }
-    //         }
-    //     );
-    // }
     const fetchExercise = useCallback(() => {
         if (!muscle) {
             if (localStorage[specificExercise] !== undefined) {
