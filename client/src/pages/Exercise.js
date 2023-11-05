@@ -2,6 +2,7 @@ import { Loading,ExerciseDetails } from '../components';
 import { useLocation } from "react-router-dom";
 import { useState, useEffect, useCallback } from "react";
 import Button from '../components/Button';
+import api from "../JS/url.js";
 
 const Exercise = () => {
     const location = useLocation();
@@ -10,10 +11,6 @@ const Exercise = () => {
     const [exercise, setExercise] = useState({});
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
-
-    // let local='http://localhost:5000';
-    let server='https://random-exercise.onrender.com';
-    let api=server;
 
     const fetchExercise = useCallback(() => {
         if (!muscle) {
@@ -58,7 +55,7 @@ const Exercise = () => {
                     setIsLoading(false);
                 });
         }
-    }, [muscle, specificExercise,api]);
+    }, [muscle, specificExercise]);
 
     useEffect(() => {
         fetchExercise();

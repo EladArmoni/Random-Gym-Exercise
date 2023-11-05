@@ -3,15 +3,12 @@ import Swal from 'sweetalert2';
 import { useState, useEffect } from 'react';
 import userIcon from '../images/user.png';
 import Button from './Button.js';
+import api from "../JS/url.js";
 
 const Navbar = () => {
     const [loginButton, setLoginButton] = useState("Login");
     const [signUpButton, setSignUpButton] = useState(true);
 
-    // let local='http://localhost:5000';
-    let server='https://random-exercise.onrender.com';
-    let api=server;
-    
     useEffect(() => {
         const user = localStorage.getItem("user");
         if (user) {
@@ -48,7 +45,7 @@ const Navbar = () => {
 
                 else {
 
-                    const url = api+'/api/user/signup';
+                    const url = api + '/api/user/signup';
                     const data = {
                         email: email,
                         password: password,
@@ -72,7 +69,7 @@ const Navbar = () => {
                             // Handle the response data here
                             if (data.message.includes("successfully")) {
                                 localStorage["user"] = JSON.stringify(data.user);
-                                if(data.token){
+                                if (data.token) {
                                     localStorage["token"] = JSON.stringify(data.token);
                                 }
                                 setLoginButton("Logout");
@@ -135,7 +132,7 @@ const Navbar = () => {
                     }
 
                     else {
-                        const url = api+'/api/user/login';
+                        const url = api + '/api/user/login';
                         const data = {
                             email: email,
                             password: password
@@ -157,7 +154,7 @@ const Navbar = () => {
                                 // Handle the response data here
                                 if (data.message.includes("successfully")) {
                                     localStorage["user"] = JSON.stringify(data.user);
-                                    if(data.token){
+                                    if (data.token) {
                                         localStorage["token"] = JSON.stringify(data.token);
                                     }
                                     setLoginButton("Logout");

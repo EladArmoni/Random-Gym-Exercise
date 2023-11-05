@@ -1,18 +1,16 @@
 import { useState } from "react";
 import { FavoriteExercise } from "../components";
+import api from "../JS/url.js";
 
 const Favorites = () => {
-    const [favorites, setFavorites] = useState(JSON.parse(localStorage["user"]).favoriteExercises);
-    
-    // let local = 'http://localhost:5000';
-    let server='https://random-exercise.onrender.com';
-    let api = server;
+    const favoriteExercises=JSON.parse(localStorage["user"]).favoriteExercises;
+    const [favorites, setFavorites] = useState(favoriteExercises);
 
     const removeFromFav = (exercise) => {
         const token = JSON.parse(localStorage.getItem('token'));
         let url;
         const data = {
-            exerciseName: exercise,
+            exerciseName: exercise.name,
             user_id: JSON.parse(localStorage["user"])._id
         };
         url = api+`/api/user/removeExerciseFromFavorite`;

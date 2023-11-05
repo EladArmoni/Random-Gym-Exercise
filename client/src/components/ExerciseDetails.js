@@ -1,16 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
+import api from "../JS/url.js";
 
 const ExerciseDetails = ({ exercise, showAnotherExerciseButton }) => {
     const [inFavorites, setInFavorites] = useState(false);
 
-    // let local = 'http://localhost:5000';
-    let server='https://random-exercise.onrender.com';
-    let api = server;
-
     useEffect(() => {
         if (localStorage["user"] !== undefined) {
-            if (JSON.parse(localStorage["user"]).favoriteExercises.includes(exercise.name)) {
+            if (JSON.parse(localStorage["user"]).favoriteExercises.includes(exercise._id)) {
                 setInFavorites(true);
             }
         }

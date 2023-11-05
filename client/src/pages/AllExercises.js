@@ -1,16 +1,13 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Header,GroupMuscle,Button } from '../components';
+import api from "../JS/url.js";
 
 const muscles = ["Legs", "Back", "Chest", "Shoulders", "Biceps", "Triceps"];
 
 const AllExercises = () => {
     const [exercises, setExercises] = useState([]);
     const [selectedExercise, setSelectedExercise] = useState(null);
-
-    // let local='http://localhost:5000';
-    let server='https://random-exercise.onrender.com';
-    let api=server;
 
     useEffect(() => {
         async function fetchExercises() {
@@ -30,7 +27,7 @@ const AllExercises = () => {
         }
 
         fetchExercises();
-    }, [api]);
+    }, []);
 
     return (
         <>

@@ -12,7 +12,7 @@ const UserSchema = new Schema({
     password: { type: String, required: true },
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
-    favoriteExercises: [String]
+    favoriteExercises: [{type:Schema.Types.ObjectId, ref:'Exercise'}]
 });
 
 const model = mongoose.model('User', UserSchema);
