@@ -241,7 +241,11 @@ div:where(.swal2-container) button:where(.swal2-styled).swal2-confirm {
     text-decoration: none;
 }
 .favoriteCard:hover{
-    cursor: pointer;
     transform: scale(1.02);
-    color:#0d6efd;
+}
+.videoThumbnail{
+    cursor: pointer;
+}
+.muscleTitle{
+    color: white;
 }

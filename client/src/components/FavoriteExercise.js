@@ -7,8 +7,9 @@ const FavoriteExercise = ({ exercise, removeFunc }) => {
         <div className="card favoriteCard" style={{ width: "18rem" }}>
             <div className="card-body p-0">
                 <Link to="/random-exercise" state={{ muscle: null, exercise: exercise.name }}>
-                    <VideoThumbnail exercise={exercise} />
+                    <VideoThumbnail className="videoThumbnail" exercise={exercise} />
                 </Link>
+                <p className="card-text mb-1">{exercise.name}</p>
                 <p className="card-text mb-1">Muscle: {exercise.muscle}</p>
                 <p className="card-text mb-1">Difficulty: {exercise.difficulty}</p>
                 <button onClick={() => removeFunc(exercise)} className="favBtn" style={{ "color": "red" }}>
