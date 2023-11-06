@@ -12,9 +12,7 @@ const FavoriteExercise = ({ exercise, removeFunc }) => {
                 <p className="card-text mb-1">{exercise.name}</p>
                 <p className="card-text mb-1">Muscle: {exercise.muscle}</p>
                 <p className="card-text mb-1">Difficulty: {exercise.difficulty}</p>
-                <button onClick={() => removeFunc(exercise)} className="favBtn" style={{ "color": "red" }}>
-                    &#10084;
-                </button>
+                <i className="fa-solid fa-heart-crack favBtn" onClick={() => removeFunc(exercise)} style={{color: '#f44e4e'}}></i>
             </div>
         </div>
     )

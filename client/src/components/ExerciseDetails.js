@@ -7,7 +7,7 @@ const ExerciseDetails = ({ exercise, showAnotherExerciseButton }) => {
     const [inFavorites, setInFavorites] = useState(false);
 
     useEffect(() => {
-        if(localStorage["user"]!==undefined){
+        if (localStorage["user"] !== undefined) {
             const user = JSON.parse(localStorage["user"]);
             if (user && user.favoriteExercises) {
                 const isFavorite = user.favoriteExercises.some(favExercise => favExercise._id === exercise._id);
@@ -71,11 +71,7 @@ const ExerciseDetails = ({ exercise, showAnotherExerciseButton }) => {
                     <h1 className="mb-2 mt-4" style={{ color: "#019AF7" }}>
                         {exercise.name}
                     </h1>
-                    <button onClick={toggleFavorite} className="favBtn"
-                        style={{ color: inFavorites ? 'red' : 'white' }}
-                    >
-                        &#10084;
-                    </button>
+                    <i className="fa-solid fa-heart favBtn" onClick={toggleFavorite} style={{ color: inFavorites ? '#f44e4e' : 'white' }}></i>
                 </div>
                 <div className="row justify-content-center background mt-4">
                     <div className="col-lg-6 text-center">
