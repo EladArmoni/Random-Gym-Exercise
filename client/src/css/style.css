@@ -249,6 +249,7 @@ div:where(.swal2-container) button:where(.swal2-styled).swal2-confirm {
 .muscleTitle{
     color: white;
 }
-div:where(.swal2-container) h2:where(.swal2-title){
+
+div:where(.swal2-container) h2:where(.swal2-title) {
     font-weight: 100 !important;
 }

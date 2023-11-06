@@ -71,12 +71,12 @@ const ExerciseDetails = ({ exercise, showAnotherExerciseButton }) => {
                     <h1 className="mb-2 mt-4" style={{ color: "#019AF7" }}>
                         {exercise.name}
                     </h1>
-                    <i className="fa-solid fa-heart favBtn" onClick={toggleFavorite} style={{ color: inFavorites ? '#f44e4e' : 'white' }}></i>
                 </div>
                 <div className="row justify-content-center background mt-4">
                     <div className="col-lg-6 text-center">
                         <h4 className="card-title">Main Muscle: {exercise.muscle} </h4>
-                        <p className="card-text mb-5">Difficulty: {exercise.difficulty}</p>
+                        <p className="card-text mb-1">Difficulty: {exercise.difficulty}</p>
+                        <i className="fa-solid fa-heart favBtn mb-4" onClick={toggleFavorite} style={{ color: inFavorites ? '#f44e4e' : 'white' }}></i>
                         <div className="ratio ratio-16x9 mb-3">
                             <iframe
                                 key={exercise.name}

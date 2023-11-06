@@ -21,7 +21,7 @@ const Navbar = () => {
     const handleSignUp = () => {
         Swal.fire({
             title: 'Sign Up',
-            html: '<input id="username" class="swal2-input" placeholder="Username">' +
+            html: '<input id="username" class="swal2-input" placeholder="Email">' +
                 '<input id="password" type="password" class="swal2-input" placeholder="Password">' +
                 '<input id="firstName" class="swal2-input" placeholder="First Name">' +
                 '<input id="lastName" class="swal2-input" placeholder="Last Name">',
@@ -34,124 +34,43 @@ const Navbar = () => {
             customClass: {
                 confirmButton: 'btn btn-primary'
             },
+            showCancelButton:true,
+            allowOutsideClick: false, // Disable clicking outside to close
+            allowEscapeKey: false, // Disable using the Escape key to close
+            showLoaderOnConfirm: true,
             preConfirm: () => {
-                const email = Swal.getPopup().querySelector('#username').value;
-                const password = Swal.getPopup().querySelector('#password').value;
-                const firstName = Swal.getPopup().querySelector('#firstName').value;
-                const lastName = Swal.getPopup().querySelector('#lastName').value;
-
-                if (!email || !password || !firstName || !lastName) {
-                    Swal.showValidationMessage('All fields are required.');
-                }
-
-                else {
-
-                    const url = api + '/api/user/signup';
-                    const data = {
-                        email: email,
-                        password: password,
-                        firstName: firstName,
-                        lastName: lastName
-                    };
-
-                    // Create the request options
-                    const requestOptions = {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json' // Set the content type to JSON
-                        },
-                        body: JSON.stringify(data) // Convert data to JSON format
-                    };
-
-                    // Make the POST request
-                    fetch(url, requestOptions)
-                        .then(response => response.json()) // Parse the response as JSON
-                        .then(data => {
-                            // Handle the response data here
-                            if (data.message.includes("successfully")) {
-                                localStorage["user"] = JSON.stringify(data.user);
-                                if (data.token) {
-                                    localStorage["token"] = JSON.stringify(data.token);
-                                }
-                                removeExpiredData();
-                                setLoginButton("Logout");
-                                setSignUpButton(false);
-                            }
-                            Swal.fire({
-                                title: data.message,
-                                icon: data.message.indexOf("successfully") !== -1 ? 'success' : 'error',
-                                showConfirmButton: false,
-                                background: '#181818',
-                                color: 'white'
-                            });
-                        })
-                        .catch(error => {
-                            // Handle any errors
-                            console.error('Error:', error);
-                        });
-                }
-            }
-        });
-    }
-
-    const handleLoginClick = () => {
-        if (loginButton === "Logout") {
-            // User is logged in, so perform a logout action
-            Swal.fire({
-                title: 'Logged Out',
-                text: 'You have been logged out.',
-                icon: 'success',
-                background: '#181818',
-                color: 'white'
-            }).then(() => {
-                setLoginButton("Login");
-                setSignUpButton(true);
-                localStorage.removeItem('user');
-                localStorage.removeItem('token');
-                window.location.href = '/';
-            });
-        } else {
-            // User is not logged in, so open the login popup
-            Swal.fire({
-                title: 'Login',
-                html: '<input id="username" class="swal2-input" placeholder="Username">' +
-                    '<input id="password" type="password" class="swal2-input" placeholder="Password">',
-                imageUrl: userIcon,
-                imageWidth: 100,
-                imageHeight: 100,
-                background: '#181818',
-                color: 'white',
-                confirmButtonText: 'Login',
-                customClass: {
-                    confirmButton: 'btn btn-primary'
-                },
-                preConfirm: () => {
+                return new Promise((resolve) => {
                     const email = Swal.getPopup().querySelector('#username').value;
                     const password = Swal.getPopup().querySelector('#password').value;
+                    const firstName = Swal.getPopup().querySelector('#firstName').value;
+                    const lastName = Swal.getPopup().querySelector('#lastName').value;
 
-                    if (!email || !password) {
-                        Swal.showValidationMessage('Username and password are required.');
+                    if (!email || !password || !firstName || !lastName) {
+                        Swal.showValidationMessage('All fields are required.');
+                        resolve();
                     }
-
                     else {
-                        const url = api + '/api/user/login';
+
+                        const url = api + '/api/user/signup';
                         const data = {
                             email: email,
-                            password: password
+                            password: password,
+                            firstName: firstName,
+                            lastName: lastName
                         };
 
                         // Create the request options
                         const requestOptions = {
                             method: 'POST',
                             headers: {
-                                'Content-Type': 'application/json' // Set the content type to JSON
+                                'Content-Type': 'application/json'
                             },
-                            body: JSON.stringify(data) // Convert data to JSON format
+                            body: JSON.stringify(data)
                         };
 
                         // Make the POST request
                         fetch(url, requestOptions)
-                            .then(response => response.json()) // Parse the response as JSON
+                            .then(response => response.json())
                             .then(data => {
                                 // Handle the response data here
                                 if (data.message.includes("successfully")) {
@@ -163,20 +82,170 @@ const Navbar = () => {
                                     setLoginButton("Logout");
                                     setSignUpButton(false);
                                 }
-
-                                Swal.fire({
-                                    title: data.message,
-                                    icon: data.message.indexOf("successfully") !== -1 ? 'success' : 'error',
-                                    showConfirmButton: false,
+                                const Toast = Swal.mixin({
+                                    toast: true,
+                                    position: "top-end",
                                     background: '#181818',
-                                    color: 'white'
+                                    color: 'white',
+                                    showConfirmButton: false,
+                                    timer: 3000,
+                                    timerProgressBar: true,
+                                    didOpen: (toast) => {
+                                        toast.onmouseenter = Swal.stopTimer;
+                                        toast.onmouseleave = Swal.resumeTimer;
+                                    }
                                 });
+                                Toast.fire({
+                                    icon: data.message.indexOf("successfully") !== -1 ? 'success' : 'error',
+                                    title: data.message
+                                });
+
+                                resolve(); // Resolve the outer Promise to prevent Swal from closing
                             })
                             .catch(error => {
                                 // Handle any errors
                                 console.error('Error:', error);
+
+                                Swal.update({
+                                    title: 'An error occurred',
+                                    icon: 'error',
+                                    showConfirmButton: true,
+                                    showCancelButton: false,
+                                    allowOutsideClick: false,
+                                    allowEscapeKey: false,
+                                });
+
+                                resolve(); // Resolve the outer Promise to prevent Swal from closing
                             });
                     }
+                });
+            }
+        });
+    }
+
+    const handleLoginClick = () => {
+        if (loginButton === "Logout") {
+            // User is logged in, so perform a logout action
+            const Toast = Swal.mixin({
+                toast: true,
+                position: "top-end",
+                background: '#181818',
+                color: 'white',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.onmouseenter = Swal.stopTimer;
+                    toast.onmouseleave = Swal.resumeTimer;
+                }
+            });
+            Toast.fire({
+                icon: 'success',
+                title: 'You have been logged out',
+                background: '#181818',
+                color: 'white'
+            }).then(() => {
+                setLoginButton("Login");
+                setSignUpButton(true);
+                localStorage.removeItem('user');
+                localStorage.removeItem('token');
+                window.location.href = '/';
+            });
+
+        } else {
+            // User is not logged in, so open the login popup
+            Swal.fire({
+                title: 'Login',
+                html: '<input id="username" class="swal2-input" placeholder="Email">' +
+                    '<input id="password" type="password" class="swal2-input" placeholder="Password">',
+                imageUrl: userIcon,
+                imageWidth: 100,
+                imageHeight: 100,
+                background: '#181818',
+                color: 'white',
+                confirmButtonText: 'Login',
+                customClass: {
+                    confirmButton: 'btn btn-primary'
+                },
+                showCancelButton:true,
+                allowOutsideClick: false, // Disable clicking outside to close
+                allowEscapeKey: false, // Disable using the Escape key to close
+                showLoaderOnConfirm: true,
+                preConfirm: () => {
+                    return new Promise((resolve) => {
+                        const email = Swal.getPopup().querySelector('#username').value;
+                        const password = Swal.getPopup().querySelector('#password').value;
+
+                        if (!email || !password) {
+                            Swal.showValidationMessage('All fields are required.');
+                            resolve();
+                        }
+                        else {
+                            const url = api + '/api/user/login';
+                            const data = {
+                                email: email,
+                                password: password
+                            };
+
+                            // Create the request options
+                            const requestOptions = {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json' // Set the content type to JSON
+                                },
+                                body: JSON.stringify(data) // Convert data to JSON format
+                            };
+                            // Make the POST request
+                            fetch(url, requestOptions)
+                                .then(response => response.json())
+                                .then(data => {
+                                    // Handle the response data here
+                                    if (data.message.includes("successfully")) {
+                                        localStorage["user"] = JSON.stringify(data.user);
+                                        if (data.token) {
+                                            localStorage["token"] = JSON.stringify(data.token);
+                                        }
+                                        removeExpiredData();
+                                        setLoginButton("Logout");
+                                        setSignUpButton(false);
+                                    }
+                                    const Toast = Swal.mixin({
+                                        toast: true,
+                                        position: "top-end",
+                                        background: '#181818',
+                                        color: 'white',
+                                        showConfirmButton: false,
+                                        timer: 3000,
+                                        timerProgressBar: true,
+                                        didOpen: (toast) => {
+                                            toast.onmouseenter = Swal.stopTimer;
+                                            toast.onmouseleave = Swal.resumeTimer;
+                                        }
+                                    });
+                                    Toast.fire({
+                                        icon: data.message.indexOf("successfully") !== -1 ? 'success' : 'error',
+                                        title: data.message
+                                    });
+
+                                    resolve(); // Resolve the outer Promise to prevent Swal from closing
+                                })
+                                .catch(error => {
+                                    // Handle any errors
+                                    console.error('Error:', error);
+
+                                    Swal.update({
+                                        title: 'An error occurred',
+                                        icon: 'error',
+                                        showConfirmButton: true,
+                                        showCancelButton: false,
+                                        allowOutsideClick: false,
+                                        allowEscapeKey: false,
+                                    });
+
+                                    resolve(); // Resolve the outer Promise to prevent Swal from closing
+                                });
+                        }
+                    });
                 }
             });
         }
