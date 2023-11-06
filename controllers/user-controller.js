@@ -12,7 +12,7 @@ const signupUser = async (req, res, next) => {
             return res.status(409).json({ message: "User with the same email is already exists." });
         }
         else {
-            bcrypt.hash(password, 10, async(error, hash) => {
+            bcrypt.hash(password, 10, (error, hash) => {
                 if (error) {
                     return res.status(500).json({ message: "bcrypt error." });
                 }
@@ -26,7 +26,7 @@ const signupUser = async (req, res, next) => {
                 });
 
                 newUser.save()
-                    .then(async user =>  {
+                    .then(user => {
                         const token = Jwt.sign({
                             id: user._id,
                             email: user.email,
@@ -38,8 +38,7 @@ const signupUser = async (req, res, next) => {
                                 expiresIn: "1H"
                             }
                         );
-                        const populatedUser = await user.populate('favoriteExercises');
-                        res.status(200).json({ user: populatedUser, message: 'Signed up successfully', token });
+                        res.status(200).json({ user: user, message: 'Signed up successfully', token });
                     })
                     .catch(error => {
                         if (error.name === 'ValidationError') {
@@ -69,7 +68,7 @@ const loginUser = async (req, res, next) => {
         }
 
         // Check if the provided password matches the stored password
-        bcrypt.compare(password, user.password, async (error, passwordMatch) => {
+        bcrypt.compare(password, user.password, (error, passwordMatch) => {
             if (error) {
                 return res.status(500).json({ message: 'Auth Failed' });
             }
@@ -87,8 +86,7 @@ const loginUser = async (req, res, next) => {
                         expiresIn: "1H"
                     }
                 );
-                const populatedUser = await user.populate('favoriteExercises');
-                return res.status(200).json({ user: populatedUser, message: 'Logged in successfully', token });
+                return res.status(200).json({ user: user, message: 'Logged in successfully', token });
             } else {
                 return res.status(401).json({ message: 'Invalid password' });
             }
