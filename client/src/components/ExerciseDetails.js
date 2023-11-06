@@ -7,10 +7,10 @@ const ExerciseDetails = ({ exercise, showAnotherExerciseButton }) => {
     const [inFavorites, setInFavorites] = useState(false);
 
     useEffect(() => {
-        if (localStorage["user"] !== undefined) {
-            if (JSON.parse(localStorage["user"]).favoriteExercises.includes(exercise._id)) {
-                setInFavorites(true);
-            }
+        const user = JSON.parse(localStorage["user"]);
+        if (user && user.favoriteExercises) {
+            const isFavorite = user.favoriteExercises.some(favExercise => favExercise._id === exercise._id);
+            setInFavorites(isFavorite);
         }
     }, [exercise]);
 

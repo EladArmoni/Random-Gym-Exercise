@@ -14,7 +14,7 @@ const signupUser = async (req, res, next) => {
         else {
             bcrypt.hash(password, 10, (error, hash) => {
                 if (error) {
-                    return res.status(500).json({message:"bcrypt error."});
+                    return res.status(500).json({ message: "bcrypt error." });
                 }
                 // Create a new user if no user with the same email is found
                 const newUser = new User({
@@ -99,11 +99,11 @@ const loginUser = async (req, res, next) => {
 
 
 const addExerciseToFavorites = async (req, res, next) => {
-    const {userId,exerciseName} = req.body.user_i;
+    const { exerciseName, user_id } = req.body;
 
     try {
         // Check if the user exists
-        const user = await User.findById(userId);
+        const user = await User.findById(user_id);
 
         if (!user) {
             // If the user is not found, return a 404 status code and message
@@ -124,12 +124,10 @@ const addExerciseToFavorites = async (req, res, next) => {
             return res.status(409).json({ message: "Exercise is already in the favorites" });
         }
 
-        // Add the exercise to the user's favorites
         user.favoriteExercises.push(exercise._id);
         await user.save();
-
-        // Return a 200 status code and success message
-        res.status(200).json({ message: "Exercise added to favorites",user:user });
+        const populatedUser = await user.populate('favoriteExercises');
+        res.status(200).json({ message: "Exercise added to favorites", user: populatedUser });
     } catch (error) {
         next(error);
     }
