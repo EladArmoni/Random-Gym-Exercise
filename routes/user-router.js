@@ -9,7 +9,7 @@ router.post("/signup",signupUser);
 router.post("/login",loginUser);
 
 //private routes
-router.post("/addExerciseToFavorite",checkAuth,addExerciseToFavorites);
+router.post("/addExerciseToFavorite",addExerciseToFavorites);
 router.post("/removeExerciseFromFavorite",checkAuth,removeExerciseFromFavorites);
 
 export default router;

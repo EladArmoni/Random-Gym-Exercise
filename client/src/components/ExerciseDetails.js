@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 import api from "../JS/url.js";
+import removeExpiredData from "../JS/removeExpiredData.js";
 
 const ExerciseDetails = ({ exercise, showAnotherExerciseButton }) => {
     const [inFavorites, setInFavorites] = useState(false);
@@ -49,6 +50,7 @@ const ExerciseDetails = ({ exercise, showAnotherExerciseButton }) => {
                 try {
                     const updatedUserJSON = JSON.stringify(data.user);
                     localStorage.setItem('user', updatedUserJSON);
+                    removeExpiredData();
                     setInFavorites(!inFavorites);
                 }
                 catch (err) {

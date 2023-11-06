@@ -14,7 +14,7 @@ const signupUser = async (req, res, next) => {
         else {
             bcrypt.hash(password, 10, (error, hash) => {
                 if (error) {
-                    return res.status(500).json({ error });
+                    return res.status(500).json({message:"bcrypt error."});
                 }
                 // Create a new user if no user with the same email is found
                 const newUser = new User({
@@ -99,32 +99,42 @@ const loginUser = async (req, res, next) => {
 
 
 const addExerciseToFavorites = async (req, res, next) => {
+    const {userId,exerciseName} = req.body.user_i;
+
     try {
-        const exercise = await Exercise.findOne({ name: req.body.exerciseName });
+        // Check if the user exists
+        const user = await User.findById(userId);
+
+        if (!user) {
+            // If the user is not found, return a 404 status code and message
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        // Find the exercise by name
+        const exercise = await Exercise.findOne({ name: exerciseName });
 
         if (!exercise) {
-            res.status(404).json({ message: 'Exercise not found' });
-            return;
+            // If the exercise is not found, return a 404 status code and message
+            return res.status(404).json({ message: "Exercise not found" });
         }
 
-        // Update the user and get the updated user data
-        const updatedUser = await User.findOneAndUpdate(
-            { _id: req.body.user_id },
-            { $push: { favoriteExercises: exercise } }, // Store the exercise ID
-            { new: true }
-        );
+        // Check if the exercise is already in the user's favorites
+        if (user.favoriteExercises.includes(exercise._id)) {
+            // If the exercise is already in the favorites, return a 409 status code and message
+            return res.status(409).json({ message: "Exercise is already in the favorites" });
+        }
 
-        if (!updatedUser) {
-            res.status(404).json({ message: 'User not found' });
-        }
-        else {
-            const populatedUser = await updatedUser.populate('favoriteExercises');
-            res.status(200).json({ message: 'Added Successfully', user: populatedUser });
-        }
+        // Add the exercise to the user's favorites
+        user.favoriteExercises.push(exercise._id);
+        await user.save();
+
+        // Return a 200 status code and success message
+        res.status(200).json({ message: "Exercise added to favorites",user:user });
     } catch (error) {
         next(error);
     }
-}
+};
+
 
 const removeExerciseFromFavorites = async (req, res, next) => {
     try {

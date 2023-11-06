@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { FavoriteExercise } from "../components";
 import api from "../JS/url.js";
+import removeExpiredData from "../JS/removeExpiredData.js";
 
 const Favorites = () => {
     const favoriteExercises=JSON.parse(localStorage["user"]).favoriteExercises;
@@ -26,6 +27,7 @@ const Favorites = () => {
             .then((data) => {
                 const updatedUserJSON = JSON.stringify(data.user);
                 localStorage.setItem('user', updatedUserJSON);
+                removeExpiredData();
                 setFavorites(data.user.favoriteExercises)
             });
     };

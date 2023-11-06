@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import userIcon from '../images/user.png';
 import Button from './Button.js';
 import api from "../JS/url.js";
+import removeExpiredData from "../JS/removeExpiredData.js";
 
 const Navbar = () => {
     const [loginButton, setLoginButton] = useState("Login");
@@ -72,6 +73,7 @@ const Navbar = () => {
                                 if (data.token) {
                                     localStorage["token"] = JSON.stringify(data.token);
                                 }
+                                removeExpiredData();
                                 setLoginButton("Logout");
                                 setSignUpButton(false);
                             }
@@ -157,6 +159,7 @@ const Navbar = () => {
                                     if (data.token) {
                                         localStorage["token"] = JSON.stringify(data.token);
                                     }
+                                    removeExpiredData();
                                     setLoginButton("Logout");
                                     setSignUpButton(false);
                                 }
