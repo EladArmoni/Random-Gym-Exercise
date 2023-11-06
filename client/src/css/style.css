@@ -253,3 +253,10 @@ div:where(.swal2-container) button:where(.swal2-styled).swal2-confirm {
 div:where(.swal2-container) h2:where(.swal2-title) {
     font-weight: 100 !important;
 }
+
+.dropdown-menu{
+    background-color: #6c757d;
+}
+.dropdown-item{
+    color:white;
+}

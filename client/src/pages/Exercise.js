@@ -36,6 +36,7 @@ const Exercise = () => {
                     .catch(error => {
                         setError(error.message);
                         setIsLoading(false);
+                        return;
                     });
             }
         } else {
@@ -49,10 +50,12 @@ const Exercise = () => {
                 .then(data => {
                     setExercise(data[0]);
                     setIsLoading(false);
+                    return;
                 })
                 .catch(error => {
                     setError(error.message);
                     setIsLoading(false);
+                    return;
                 });
         }
     }, [muscle, specificExercise]);

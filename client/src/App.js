@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route} from 'react-router-dom'
-import { Home, Muscles, AllExercises, ErrorPage, RandomExercise, Favorites } from './pages'
+import { Home, Muscles, AllExercises, ErrorPage, Exercise, Favorites } from './pages'
 import Layout from './components/Layout.js'
 
 function App() {
@@ -12,7 +12,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path="/muscles" element={<Muscles />} />
           <Route path="/exercises" element={<AllExercises />} />
-          <Route path="/random-exercise" element={<RandomExercise />} />
+          <Route path="/random-exercise" element={<Exercise />} />
           {isLoggedIn && (<Route path="/favorites" element={<Favorites/>} />)}
           <Route path="*" element={<ErrorPage />} />
         </Route>

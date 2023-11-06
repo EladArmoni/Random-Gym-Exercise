@@ -14,7 +14,7 @@ const ExerciseDetails = ({ exercise, showAnotherExerciseButton }) => {
                 setInFavorites(isFavorite);
             }
         }
-    }, [exercise]);
+    }, [exercise._id]);
 
     const toggleFavorite = () => {
         const token = JSON.parse(localStorage.getItem('token'));
