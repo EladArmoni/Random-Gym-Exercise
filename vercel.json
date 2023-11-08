@@ -7,17 +7,20 @@
     }
   ],
   "routes": [
-    { "handle": "filesystem" },
     {
-      "src": "/api/exercise/.*",
+      "src": "/client/public/(.*)",
+      "dest": "/client/public/$1"
+    },
+    {
+      "src": "/api/exercise/(.*)",
       "dest": "/server.js"
     },
     {
-      "src": "/api/user/.*",
+      "src": "/api/user/(.*)",
       "dest": "/server.js"
     },
     {
-      "src": "/.*",
+      "src": "/(.*)",
       "dest": "/server.js"
     }
   ]
