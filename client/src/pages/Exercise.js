@@ -80,7 +80,7 @@ const Exercise = () => {
             <>
                 <div id='loader_container' className="container-fluid text-center" style={{ height: '100vh', backgroundColor: "#061118", color: "white" }}>
                     <div style={{ width: '100px' }} id='loader'>
-                        <Loading type='spin' color='white' />
+                        <Loading type='bubbles' color='white' />
                     </div>
                 </div>
             </>
