@@ -46,6 +46,9 @@ nav {
         justify-content: space-between;
         align-items: center;
     }
+    .muscle-image{
+        height:280px !important;
+    }
 }
 
 @media (max-width: 992px) {
